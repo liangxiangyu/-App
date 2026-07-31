@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Netlify 部署指南</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    h1 {
+      font-size: 32px;
+      color: #333;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 40px;
+      font-size: 16px;
+    }
+    .step {
+      margin-bottom: 30px;
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 12px;
+      border-left: 4px solid #667eea;
+    }
+    .step-number {
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+      background: #667eea;
+      color: #fff;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 32px;
+      font-weight: bold;
+      margin-right: 12px;
+    }
+    .step-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 12px;
+    }
+    .step-content {
+      color: #555;
+      line-height: 1.8;
+      margin-left: 44px;
+    }
+    .btn-primary {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      background: #667eea;
+      color: #fff;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: 600;
+      margin: 30px 0;
+      transition: background 0.3s;
+    }
+    .btn-primary:hover {
+      background: #5568d3;
+    }
+    .highlight {
+      background: #fff3cd;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #856404;
+      font-weight: 500;
+    }
+    .code {
+      background: #282c34;
+      color: #61dafb;
+      padding: 12px 16px;
+      border-radius: 6px;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      margin: 10px 0;
+      word-break: break-all;
+    }
+    .success-box {
+      background: #d4edda;
+      border: 1px solid #c3e6cb;
+      color: #155724;
+      padding: 16px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+    .folder-path {
+      background: #e7f3ff;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-family: 'Courier New', monospace;
+      color: #0066cc;
+      display: inline-block;
+      margin: 8px 0;
+    }
+    .tips {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 16px;
+      margin: 20px 0;
+      border-radius: 4px;
+    }
+    .tips-title {
+      font-weight: 600;
+      color: #856404;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🚀 Netlify 快速部署指南</h1>
+    <p class="subtitle">30秒完成部署，无需任何技术背景</p>
+
+    <a href="https://app.netlify.com/drop" target="_blank" class="btn-primary">
+      👉 点击这里打开 Netlify 部署页面
+    </a>
+
+    <div class="step">
+      <div class="step-title">
+        <span class="step-number">1</span>
+        准备要上传的文件夹
+      </div>
+      <div class="step-content">
+        找到项目中的 <span class="folder-path">app</span> 文件夹，位置在：
+        <div class="folder-path">C:\Users\65739\Desktop\督察App 重构考题\app</div>
+        <div class="tips">
+          <div class="tips-title">💡 提示</div>
+          确保 app 文件夹包含所有 HTML、CSS 文件（共15个文件）
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-title">
+        <span class="step-number">2</span>
+        拖拽文件夹到网页
+      </div>
+      <div class="step-content">
+        在打开的 Netlify 页面中，直接将 <span class="highlight">app 文件夹</span> 拖拽到网页的虚线框内。
+        <br><br>
+        📦 拖拽整个文件夹，不是单个文件！
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-title">
+        <span class="step-number">3</span>
+        等待上传完成
+      </div>
+      <div class="step-content">
+        Netlify 会自动上传并部署，通常只需要 <span class="highlight">10-20秒</span>。
+        <br>
+        上传完成后，页面会自动刷新并显示部署成功的信息。
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-title">
+        <span class="step-number">4</span>
+        复制访问地址
+      </div>
+      <div class="step-content">
+        部署成功后，Netlify 会生成一个访问地址，格式类似：
+        <div class="code">https://random-name-123456.netlify.app</div>
+        
+        您需要复制两个地址：
+        <br><br>
+        <strong>① 电脑端查看地址：</strong>
+        <div class="code">https://random-name-123456.netlify.app/index.html</div>
+        
+        <strong>② 手机端预览地址（用于生成二维码）：</strong>
+        <div class="code">https://random-name-123456.netlify.app/preview.html</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-title">
+        <span class="step-number">5</span>
+        生成二维码
+      </div>
+      <div class="step-content">
+        <ol style="line-height: 2;">
+          <li>打开本地的 <span class="highlight">index.html</span> 文件</li>
+          <li>在页面右上角的白色面板中找到输入框</li>
+          <li>粘贴 <span class="highlight">preview.html</span> 的完整地址</li>
+          <li>点击 <span class="highlight">生成二维码</span> 按钮</li>
+        </ol>
+        <div class="success-box">
+          ✅ 完成！二维码已生成并自动保存，下次打开会自动显示
+        </div>
+      </div>
+    </div>
+
+    <div class="tips">
+      <div class="tips-title">📱 交付给领导</div>
+      现在可以将本地的 <strong>index.html</strong>（和 app 文件夹）发送给领导：
+      <ul style="margin-top: 10px; line-height: 2;">
+        <li><strong>电脑端：</strong>双击 index.html 查看所有界面</li>
+        <li><strong>手机端：</strong>扫描页面右上角二维码，手机浏览交互</li>
+      </ul>
+      领导无需任何操作，打开即用！
+    </div>
+
+    <div style="text-align: center; margin-top: 40px; color: #999; font-size: 14px;">
+      遇到问题？检查 app 文件夹是否包含所有文件，或重新拖拽上传
+    </div>
+  </div>
+</body>
+</html>

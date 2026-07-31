@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>督导列表</title>
+  <link rel="stylesheet" href="shared.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .biz-tabs {
+      display: flex; gap: 0;
+      padding: 0; background: var(--bg-card);
+      border-bottom: 1px solid var(--border-light);
+      overflow-x: auto;
+    }
+    .biz-tabs::-webkit-scrollbar { display: none; }
+    .biz-tabs .biz-tab {
+      padding: 12px 16px; font-size: 14px;
+      color: var(--text-secondary); white-space: nowrap;
+      border-bottom: 2.5px solid transparent;
+      cursor: pointer; font-weight: 500; text-align: center;
+    }
+    .biz-tabs .biz-tab.active {
+      color: var(--primary); font-weight: 600;
+      border-bottom-color: var(--primary);
+    }
+    .card .action-btns { flex-wrap: wrap; }
+    .add-fab {
+      position: fixed; right: 16px;
+      bottom: calc(50px + 34px + 20px);
+      width: 50px; height: 50px;
+      background: var(--primary);
+      color: #fff; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; font-weight: 300; line-height: 1;
+      box-shadow: 0 4px 14px rgba(37,99,235,0.35);
+      cursor: pointer; z-index: 50;
+      text-decoration: none;
+    }
+    .add-fab:active { transform: scale(0.92); }
+  </style>
+</head>
+<body>
+  <div class="status-bar">
+    <span class="time">9:41</span>
+    <div class="icons">
+      <i class="fas fa-signal"></i>
+      <i class="fas fa-wifi"></i>
+      <i class="fas fa-battery-full"></i>
+    </div>
+  </div>
+
+  <div class="search-bar">
+    <div class="search-wrap">
+      <i class="fas fa-search"></i>
+      <input type="text" placeholder="请输入问题名称/督导人员/处室" id="searchInput">
+    </div>
+  </div>
+
+  <div class="biz-tabs" id="bizTabs">
+    <div class="biz-tab active">督导</div>
+    <div class="biz-tab">交办</div>
+    <div class="biz-tab">督办</div>
+    <div class="biz-tab">资料调阅</div>
+    <div class="biz-tab">问责</div>
+  </div>
+
+  <div class="page-content">
+    <div class="card">
+      <div class="card-title">
+        <span class="tag tag-orange">待审核</span>
+        <span style="flex:1;margin-left:6px;">L2ZYDC063</span>
+      </div>
+      <div class="field-row"><span class="label">处室</span><span class="value">督察一处</span></div>
+      <div class="field-row"><span class="label">督导日期</span><span class="value">2026-07-16</span></div>
+      <div class="field-row"><span class="label">督导人员</span><span class="value">秦莉华</span></div>
+      <div class="field-row"><span class="label">督导方式</span><span class="value"><span class="tag tag-blue">现场检查</span></span></div>
+      <div class="field-row"><span class="label">市级例行督察</span><span class="value">否</span></div>
+      <div class="field-row"><span class="label">业务类型</span><span class="value">历史督察问题</span></div>
+      <div class="field-row"><span class="label">核查情况</span><span class="value">已整改</span></div>
+      <div class="field-row"><span class="label">是否交办</span><span class="value">不交办</span></div>
+      <div class="action-btns">
+        <button class="btn btn-primary" onclick="viewDetail('readonly')">详情</button>
+        <button class="btn btn-outline" onclick="viewDetail('edit')">编辑</button>
+        <button class="btn btn-outline" onclick="submitAudit()">提交审核</button>
+        <button class="btn btn-danger" onclick="showConfirm()">删除</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <span class="tag tag-green">审核通过</span>
+        <span style="flex:1;margin-left:6px;">L3ZYDC001</span>
+      </div>
+      <div class="field-row"><span class="label">处室</span><span class="value">督察二处</span></div>
+      <div class="field-row"><span class="label">督导日期</span><span class="value">2026-07-10</span></div>
+      <div class="field-row"><span class="label">督导人员</span><span class="value">张涵</span></div>
+      <div class="field-row"><span class="label">督导方式</span><span class="value"><span class="tag tag-blue">书面督导</span></span></div>
+      <div class="field-row"><span class="label">市级例行督察</span><span class="value">否</span></div>
+      <div class="field-row"><span class="label">业务类型</span><span class="value">第三轮中央督察问题</span></div>
+      <div class="field-row"><span class="label">核查情况</span><span class="value">核查发现整改有差距</span></div>
+      <div class="field-row"><span class="label">是否交办</span><span class="value">不交办</span></div>
+      <div class="action-btns">
+        <button class="btn btn-primary" onclick="viewDetail('readonly')">详情</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <span class="tag tag-red">审核驳回</span>
+        <span style="flex:1;margin-left:6px;">L1ZYDC101</span>
+      </div>
+      <div class="field-row"><span class="label">处室</span><span class="value">督察一处</span></div>
+      <div class="field-row"><span class="label">督导日期</span><span class="value">2026-07-05</span></div>
+      <div class="field-row"><span class="label">督导人员</span><span class="value">李明远</span></div>
+      <div class="field-row"><span class="label">督导方式</span><span class="value"><span class="tag tag-blue">视频督导</span></span></div>
+      <div class="field-row"><span class="label">市级例行督察</span><span class="value">是</span></div>
+      <div class="field-row"><span class="label">业务类型</span><span class="value">线索问题</span></div>
+      <div class="field-row"><span class="label">核查情况</span><span class="value">未完成整改</span></div>
+      <div class="field-row"><span class="label">是否交办</span><span class="value">交办</span></div>
+      <div class="action-btns">
+        <button class="btn btn-primary" onclick="viewDetail('readonly')">详情</button>
+        <button class="btn btn-outline" onclick="viewDetail('edit')">编辑</button>
+        <button class="btn btn-outline" onclick="submitAudit()">提交审核</button>
+        <button class="btn btn-danger" onclick="showConfirm()">删除</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="add-fab" onclick="location.href='supervision-form.html'">+</div>
+
+  <div class="tab-bar">
+    <div class="tab-item" onclick="location.href='problem-list.html'"><i class="fas fa-clipboard-list"></i><span>问题</span></div>
+    <div class="tab-item active"><i class="fas fa-search-location"></i><span>督察</span></div>
+    <div class="tab-item" onclick="location.href='map.html'"><i class="fas fa-map-marked-alt"></i><span>地图</span></div>
+    <div class="tab-item" onclick="location.href='support.html'"><i class="fas fa-hands-helping"></i><span>支持</span></div>
+  </div>
+
+  <div class="dialog-mask" id="dialogMask">
+    <div class="dialog-box">
+      <div class="dialog-title">删除确认</div>
+      <div class="dialog-msg">确定删除该督导记录？删除后不可恢复。</div>
+      <div class="dialog-btns">
+        <button class="btn btn-outline" onclick="closeDialog()">取消</button>
+        <button class="btn btn-danger" onclick="confirmDelete()">确认删除</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    function viewDetail(mode) { location.href = 'supervision-form.html'; }
+    function submitAudit() { showToast('提交审核成功'); }
+    function showConfirm() { document.getElementById('dialogMask').classList.add('show'); }
+    function closeDialog() { document.getElementById('dialogMask').classList.remove('show'); }
+    function confirmDelete() { closeDialog(); showToast('删除成功'); }
+    function showToast(msg) {
+      var t = document.getElementById('toast');
+      t.textContent = msg; t.classList.add('show');
+      setTimeout(function() { t.classList.remove('show'); }, 1500);
+    }
+    document.querySelectorAll('#bizTabs .biz-tab').forEach(function(item) {
+      item.addEventListener('click', function() {
+        document.querySelectorAll('#bizTabs .biz-tab').forEach(function(s) { s.classList.remove('active'); });
+        this.classList.add('active');
+      });
+    });
+    document.getElementById('searchInput').addEventListener('input', function() {
+      if (!this.value) showToast('已清空搜索');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>线索问题列表</title>
+  <link rel="stylesheet" href="shared.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="status-bar">
+    <span class="time">9:41</span>
+    <div class="icons">
+      <i class="fas fa-signal"></i>
+      <i class="fas fa-wifi"></i>
+      <i class="fas fa-battery-full"></i>
+    </div>
+  </div>
+
+  <div class="search-bar">
+    <div class="search-wrap">
+      <i class="fas fa-search"></i>
+      <input type="text" placeholder="请输入线索标题/编号/发现情况" id="searchInput">
+    </div>
+    <div class="filter-btn" onclick="showFilter()">
+      <i class="fas fa-sliders-h"></i>
+      <span>筛选</span>
+    </div>
+  </div>
+
+  <div class="segment-tabs">
+    <div class="seg-item" onclick="location.href='problem-list.html'">清单问题</div>
+    <div class="seg-item active">线索问题</div>
+    <div class="seg-item" onclick="location.href='inspection-list.html'">督察问题</div>
+  </div>
+
+  <div class="page-content" id="listContent">
+    <!-- 已提交线索 -->
+    <div class="card">
+      <div class="card-title">
+        <span class="tag tag-blue">已提交</span>
+        <span style="flex:1;margin-left:6px;">L1ZYDC101-铜梁安居国家湿地公园新问题</span>
+      </div>
+      <div class="field-row"><span class="label">编号</span><span class="value">XS1178409664</span></div>
+      <div class="field-row"><span class="label">行政区划</span><span class="value">铜梁</span></div>
+      <div class="field-row"><span class="label">领域</span><span class="value">自然生态保护和修复</span></div>
+      <div class="field-row"><span class="label">来源</span><span class="value">督察发现</span></div>
+      <div class="field-row"><span class="label">发现时间</span><span class="value">2026-07-10</span></div>
+      <div class="field-row"><span class="label">发现情况</span><span class="value">现场核查发现相关设施未按要求处置</span></div>
+      <div class="action-btns">
+        <button class="btn btn-primary" onclick="location.href='clue-detail.html'">查看</button>
+        <button class="btn btn-outline" onclick="location.href='supervision-form.html'">现场核查</button>
+        <button class="btn btn-danger" onclick="showConfirm('撤回','确定撤回该线索？撤回后状态将变为草稿。','withdraw')">撤回</button>
+      </div>
+    </div>
+
+    <!-- 草稿线索 -->
+    <div class="card">
+      <div class="card-title">
+        <span class="tag tag-gray">草稿</span>
+        <span style="flex:1;margin-left:6px;">渝北区水库周边违规养殖线索</span>
+      </div>
+      <div class="field-row"><span class="label">编号</span><span class="value">XS1178409700</span></div>
+      <div class="field-row"><span class="label">行政区划</span><span class="value">渝北</span></div>
+      <div class="field-row"><span class="label">领域</span><span class="value">水污染防治</span></div>
+      <div class="field-row"><span class="label">来源</span><span class="value">群众举报</span></div>
+      <div class="field-row"><span class="label">发现时间</span><span class="value">2026-07-08</span></div>
+      <div class="field-row"><span class="label">发现情况</span><span class="value">水库上游约200米处存在规模化养殖场</span></div>
+      <div class="action-btns">
+        <button class="btn btn-outline" onclick="location.href='clue-form.html'">修改</button>
+        <button class="btn btn-primary" onclick="showConfirm('提交','确定提交该线索？','submit')">提交</button>
+        <button class="btn btn-danger" onclick="showConfirm('删除','确定删除该线索？删除后不可恢复。','delete')">删除</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 新增按钮 -->
+  <!-- <div class="fab" onclick="location.href='clue-form.html'">
+    <i class="fas fa-plus"></i>
+  </div> -->
+  <div class="add-fab" onclick="location.href='supervision-form.html'">+</div>
+
+  <!-- 底部 TabBar -->
+  <div class="tab-bar">
+    <div class="tab-item active">
+      <i class="fas fa-clipboard-list"></i>
+      <span>问题</span>
+    </div>
+    <div class="tab-item" onclick="location.href='supervision-list.html'">
+      <i class="fas fa-search-location"></i>
+      <span>督察</span>
+    </div>
+    <div class="tab-item" onclick="location.href='map.html'">
+      <i class="fas fa-map-marked-alt"></i>
+      <span>地图</span>
+    </div>
+    <div class="tab-item" onclick="location.href='support.html'">
+      <i class="fas fa-hands-helping"></i>
+      <span>支持</span>
+    </div>
+  </div>
+
+  <!-- 筛选面板 -->
+  <div class="filter-panel" id="filterPanel">
+    <div class="panel-body">
+      <div class="panel-title">更多查询条件</div>
+      <div class="option-group">
+        <div class="option-label">行政区划</div>
+        <div class="options">
+          <div class="opt-item active">全部</div>
+          <div class="opt-item">铜梁</div>
+          <div class="opt-item">渝北</div>
+          <div class="opt-item">巫山</div>
+          <div class="opt-item">綦江</div>
+        </div>
+      </div>
+      <div class="option-group">
+        <div class="option-label">领域</div>
+        <div class="options">
+          <div class="opt-item active">全部</div>
+          <div class="opt-item">自然生态保护和修复</div>
+          <div class="opt-item">水污染防治</div>
+          <div class="opt-item">大气污染防治</div>
+        </div>
+      </div>
+      <div class="panel-actions">
+        <button class="btn btn-outline" style="flex:1;" onclick="hideFilter()">取消</button>
+        <button class="btn btn-outline" style="flex:1;" onclick="resetFilter()">重置</button>
+        <button class="btn btn-primary" style="flex:1;" onclick="confirmFilter()">确定</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 确认弹窗 -->
+  <div class="dialog-mask" id="dialogMask">
+    <div class="dialog-box">
+      <div class="dialog-title" id="dialogTitle">确认</div>
+      <div class="dialog-msg" id="dialogMsg">确认执行操作？</div>
+      <div class="dialog-btns">
+        <button class="btn btn-outline" onclick="closeDialog()">取消</button>
+        <button class="btn btn-primary" onclick="confirmAction()">确认</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    let currentAction = '';
+    function showFilter() { document.getElementById('filterPanel').classList.add('show'); }
+    function hideFilter() { document.getElementById('filterPanel').classList.remove('show'); }
+    function resetFilter() {
+      document.querySelectorAll('#filterPanel .opt-item').forEach((el,i) => {
+        el.classList.remove('active');
+      });
+      document.querySelectorAll('#filterPanel .options').forEach(group => {
+        const first = group.querySelector('.opt-item');
+        if (first) first.classList.add('active');
+      });
+      showToast('已重置筛选条件');
+    }
+    function confirmFilter() { hideFilter(); showToast('筛选条件已应用'); }
+
+    function showConfirm(title, msg, action) {
+      currentAction = action;
+      document.getElementById('dialogTitle').textContent = title;
+      document.getElementById('dialogMsg').textContent = msg;
+      document.getElementById('dialogMask').classList.add('show');
+    }
+    function closeDialog() { document.getElementById('dialogMask').classList.remove('show'); }
+    function confirmAction() {
+      closeDialog();
+      if (currentAction === 'delete') showToast('删除成功');
+      else if (currentAction === 'submit') showToast('提交成功');
+      else if (currentAction === 'withdraw') showToast('撤回成功');
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 1500);
+    }
+
+    document.querySelectorAll('.opt-item').forEach(item => {
+      item.addEventListener('click', function() {
+        const siblings = this.parentElement.querySelectorAll('.opt-item');
+        siblings.forEach(s => s.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    document.getElementById('searchInput').addEventListener('input', function() {
+      if (!this.value) showToast('已清空搜索');
+    });
+  </script>
+</body>
+</html>

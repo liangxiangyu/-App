@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>地图详情</title>
+  <link rel="stylesheet" href="shared.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="status-bar">
+    <span class="time">9:41</span>
+    <div class="icons">
+      <i class="fas fa-signal"></i>
+      <i class="fas fa-wifi"></i>
+      <i class="fas fa-battery-full"></i>
+    </div>
+  </div>
+
+  <div class="nav-bar">
+    <span class="title" style="margin-right:0;">督察地图</span>
+  </div>
+
+  <!-- 地图区域（带浮层） -->
+  <div style="position:relative;height:calc(100vh - 54px - 44px - 84px);">
+    <!-- 简化地图背景 -->
+    <div style="width:100%;height:100%;background:#e8eff8;position:relative;">
+      <svg width="100%" height="100%" viewBox="0 0 360 400" style="position:absolute;top:0;left:0;">
+        <rect width="360" height="400" fill="#e8eff8"/>
+        <path d="M80,150 Q120,100 180,110 T280,130 Q300,170 290,220 T240,290 Q200,330 160,310 T100,250 Q70,210 80,150Z" fill="#c8ddf0" stroke="#a0bdd8" stroke-width="1.5"/>
+      </svg>
+      <!-- 选中点位 -->
+      <div style="position:absolute;top:140px;left:140px;">
+        <div style="width:36px;height:36px;background:var(--primary);border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(26,92,255,0.4);">
+          <i class="fas fa-exclamation" style="color:#fff;font-size:14px;transform:rotate(45deg);"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- 详情浮层 -->
+    <div class="map-overlay">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="tag tag-blue">督察问题</span>
+          <span style="font-size:15px;font-weight:600;">L1QZTS1357</span>
+        </div>
+        <i class="fas fa-times" style="font-size:18px;color:var(--text-tertiary);cursor:pointer;" onclick="location.href='map.html'"></i>
+      </div>
+
+      <div class="field-row"><span class="label">编号</span><span class="value">L1QZTS1357</span></div>
+      <div class="field-row"><span class="label">类型标签</span><span class="value"><span class="tag tag-blue">督察问题</span></span></div>
+      <div class="field-row"><span class="label">内容</span><span class="value">渝北区某雷达导航塔周边群众反映辐射担忧并申请监测</span></div>
+      <div class="field-row"><span class="label">批次</span><span class="value">第一轮中央督察投诉</span></div>
+      <div class="field-row"><span class="label">整改完成情况</span><span class="value"><span class="tag tag-green">已办结</span></span></div>
+      <div class="field-row"><span class="label">责任单位</span><span class="value">重庆市生态环境局（核与辐射安全管理处）</span></div>
+
+      <div style="margin-top:16px;">
+        <button class="btn btn-primary btn-block" onclick="navigate()">
+          <i class="fas fa-location-arrow" style="margin-right:6px;"></i>导航至此
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部 TabBar -->
+  <div class="tab-bar">
+    <div class="tab-item" onclick="location.href='problem-list.html'">
+      <i class="fas fa-clipboard-list"></i>
+      <span>问题</span>
+    </div>
+    <div class="tab-item" onclick="location.href='supervision-list.html'">
+      <i class="fas fa-search-location"></i>
+      <span>督察</span>
+    </div>
+    <div class="tab-item active">
+      <i class="fas fa-map-marked-alt"></i>
+      <span>地图</span>
+    </div>
+    <div class="tab-item" onclick="location.href='support.html'">
+      <i class="fas fa-hands-helping"></i>
+      <span>支持</span>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    function navigate() {
+      const t = document.getElementById('toast');
+      t.textContent = '正在打开导航…';
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 1500);
+    }
+  </script>
+</body>
+</html>
