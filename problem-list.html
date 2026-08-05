@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>清单问题列表</title>
+  <link rel="stylesheet" href="shared.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="status-bar">
+    <span class="time">9:41</span>
+    <div class="icons">
+      <i class="fas fa-signal"></i>
+      <i class="fas fa-wifi"></i>
+      <i class="fas fa-battery-full"></i>
+    </div>
+  </div>
+
+  <div class="search-bar">
+    <div class="search-wrap">
+      <i class="fas fa-search"></i>
+      <input type="text" placeholder="请输入问题标题/描述/问题编码" id="searchInput">
+    </div>
+    <div class="filter-btn" onclick="showFilter()">
+      <i class="fas fa-sliders-h"></i>
+      <span>筛选</span>
+    </div>
+  </div>
+
+  <div class="segment-tabs">
+    <div class="seg-item active">清单问题</div>
+    <div class="seg-item" onclick="location.href='clue-list.html'">线索问题</div>
+    <div class="seg-item" onclick="location.href='inspection-list.html'">督察问题</div>
+  </div>
+
+  <div class="page-content">
+    <div class="card">
+      <div class="card-title"><span>綦江区矿井水整治效果需持续巩固</span></div>
+      <div class="field-row"><span class="label">问题编码</span><span class="value">ST26042920094</span></div>
+      <div class="field-row"><span class="label">整改责任单位</span><span class="value">重庆市-区县-綦江区</span></div>
+      <div class="field-row"><span class="label">行业主管部门</span><span class="value">未指定</span></div>
+      <div class="field-row"><span class="label">问题来源</span><span class="value">第三轮中央督察</span></div>
+      <div class="field-row"><span class="label">发生领域</span><span class="value">矿产资源合理利用和保护</span></div>
+      <div class="field-row"><span class="label">督导状态</span><span class="value"><span class="tag tag-gray">未核查</span></span></div>
+      <div class="field-row"><span class="label">整改状态</span><span class="value"><span class="tag tag-orange">整改中</span></span></div>
+      <div class="field-row"><span class="label">临期/超期</span><span class="value"><span class="tag tag-green">正常</span></span></div>
+      <div class="field-row"><span class="label">督导后风险</span><span class="value"><span class="tag tag-gray">未评估</span></span></div>
+      <div class="field-row"><span class="label">整改期限</span><span class="value">-</span></div>
+      <div class="field-row"><span class="label">办结时间</span><span class="value">-</span></div>
+      <div class="action-btns">
+        <button class="btn btn-primary" onclick="location.href='problem-detail.html'">问题管理</button>
+        <button class="btn btn-outline" onclick="location.href='supervision-form.html'">发起督导</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span>巫山县饮用水水源二级保护区临时货运码头尚未完成搬迁</span></div>
+      <div class="field-row"><span class="label">问题编码</span><span class="value">ST24123015610</span></div>
+      <div class="field-row"><span class="label">整改责任单位</span><span class="value">巫山县人民政府</span></div>
+      <div class="field-row"><span class="label">行业主管部门</span><span class="value">市生态环境局</span></div>
+      <div class="field-row"><span class="label">问题来源</span><span class="value">第三轮中央督察</span></div>
+      <div class="field-row"><span class="label">发生领域</span><span class="value">饮用水水源地生态环境保护</span></div>
+      <div class="field-row"><span class="label">督导状态</span><span class="value"><span class="tag tag-blue">核查中</span></span></div>
+      <div class="field-row"><span class="label">整改状态</span><span class="value"><span class="tag tag-orange">整改中</span></span></div>
+      <div class="field-row"><span class="label">临期/超期</span><span class="value"><span class="tag tag-orange">临期</span></span></div>
+      <div class="field-row"><span class="label">督导后风险</span><span class="value"><span class="tag tag-orange">中风险</span></span></div>
+      <div class="field-row"><span class="label">整改期限</span><span class="value">2025-03-31</span></div>
+      <div class="field-row"><span class="label">办结时间</span><span class="value">-</span></div>
+      <div class="action-btns">
+        <button class="btn btn-primary" onclick="location.href='problem-detail.html'">问题管理</button>
+        <button class="btn btn-outline" onclick="location.href='supervision-form.html'">发起督导</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-bar">
+    <div class="tab-item active"><i class="fas fa-clipboard-list"></i><span>问题</span></div>
+    <div class="tab-item" onclick="location.href='supervision-list.html'"><i class="fas fa-search-location"></i><span>督察</span></div>
+    <div class="tab-item" onclick="location.href='map.html'"><i class="fas fa-map-marked-alt"></i><span>地图</span></div>
+    <div class="tab-item" onclick="location.href='support.html'"><i class="fas fa-hands-helping"></i><span>支持</span></div>
+  </div>
+
+  <div class="filter-panel" id="filterPanel" onclick="hideFilter()">
+    <div class="panel-body" onclick="event.stopPropagation()">
+      <div class="panel-title">更多查询条件</div>
+      <div class="option-group"><div class="option-label">督导单位</div><div class="options"><div class="opt-item">全部</div><div class="opt-item">督察一处</div><div class="opt-item">督察二处</div><div class="opt-item">督察三处</div></div></div>
+      <div class="option-group"><div class="option-label">问题来源</div><div class="options"><div class="opt-item">全部</div><div class="opt-item">第三轮中央督察</div><div class="opt-item">第二轮中央督察</div><div class="opt-item">长江警示片</div></div></div>
+      <div class="option-group"><div class="option-label">发生领域</div><div class="options"><div class="opt-item">全部</div><div class="opt-item">饮用水水源地</div><div class="opt-item">矿产资源</div><div class="opt-item">自然生态保护</div></div></div>
+      <div class="option-group"><div class="option-label">整改状态</div><div class="options"><div class="opt-item">全部</div><div class="opt-item">未整改</div><div class="opt-item">整改中</div><div class="opt-item">已办结</div></div></div>
+      <div class="option-group"><div class="option-label">临期超期情况</div><div class="options"><div class="opt-item">全部</div><div class="opt-item">正常</div><div class="opt-item">临期</div><div class="opt-item">超期</div></div></div>
+      <div class="option-group"><div class="option-label">督导状态</div><div class="options"><div class="opt-item">全部</div><div class="opt-item">未核查</div><div class="opt-item">核查中</div><div class="opt-item">已核查</div></div></div>
+      <div class="option-group"><div class="option-label">督导后风险</div><div class="options"><div class="opt-item">全部</div><div class="opt-item">未评估</div><div class="opt-item">低风险</div><div class="opt-item">中风险</div><div class="opt-item">高风险</div></div></div>
+      <div class="panel-actions">
+        <button class="btn btn-outline" onclick="hideFilter()">取消</button>
+        <button class="btn btn-outline" onclick="resetFilter()">重置</button>
+        <button class="btn btn-primary" onclick="confirmFilter()">确定</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    function showFilter() { document.getElementById('filterPanel').classList.add('show'); }
+    function hideFilter() { document.getElementById('filterPanel').classList.remove('show'); }
+    function resetFilter() {
+      document.querySelectorAll('#filterPanel .opt-item.active').forEach(function(el) { el.classList.remove('active'); });
+      showToast('已重置筛选条件');
+    }
+    function confirmFilter() { hideFilter(); showToast('筛选条件已应用'); }
+    function showToast(msg) {
+      var t = document.getElementById('toast');
+      t.textContent = msg; t.classList.add('show');
+      setTimeout(function() { t.classList.remove('show'); }, 1500);
+    }
+    document.getElementById('searchInput').addEventListener('input', function() {
+      if (!this.value) showToast('已清空搜索');
+    });
+    document.querySelectorAll('.opt-item').forEach(function(item) {
+      item.addEventListener('click', function() {
+        var siblings = this.parentElement.querySelectorAll('.opt-item');
+        siblings.forEach(function(s) { s.classList.remove('active'); });
+        this.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>督导表单</title>
+  <link rel="stylesheet" href="shared.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .error-tip { font-size: 12px; color: var(--danger); margin-top: 4px; display: none; }
+    .error-tip.show { display: block; }
+    .form-group.has-error .form-control { border-color: var(--danger); }
+    .form-opts { display: flex; gap: 8px; flex-wrap: wrap; }
+    .form-opts .opt-chip {
+      padding: 8px 16px;
+      background: var(--bg-page);
+      border-radius: 20px;
+      font-size: 13px;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      transition: all .15s;
+      color: var(--text-secondary);
+    }
+    .form-opts .opt-chip:active { transform: scale(0.96); }
+    .form-opts .opt-chip.active {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: var(--primary);
+      font-weight: 500;
+    }
+    .select-field {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: #fff;
+      cursor: pointer;
+      transition: border-color .2s;
+    }
+    .select-field:active { border-color: var(--primary); }
+    .select-field .select-val { font-size: 14px; color: var(--text-primary); }
+    .select-field .select-arrow { font-size: 12px; color: var(--text-tertiary); }
+    .dropdown-panel {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.4); z-index: 200; display: none;
+    }
+    .dropdown-panel.show { display: block; }
+    .dropdown-panel .dropdown-body {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: var(--bg-card);
+      border-radius: 20px 20px 0 0;
+      padding: 20px 16px calc(34px + 16px);
+      max-height: 50vh; overflow-y: auto;
+      animation: slideUp .25s ease-out;
+    }
+    .dropdown-panel .dropdown-title {
+      font-size: 16px; font-weight: 600;
+      text-align: center; margin-bottom: 16px;
+    }
+    .dropdown-panel .dropdown-list { padding: 0; }
+    .dropdown-panel .dropdown-item {
+      padding: 14px 16px;
+      font-size: 15px;
+      border-bottom: 0.5px solid var(--border-light);
+      display: flex; align-items: center; justify-content: space-between;
+      cursor: pointer; transition: background .15s;
+    }
+    .dropdown-panel .dropdown-item:active { background: var(--bg-page); }
+    .dropdown-panel .dropdown-item:last-child { border-bottom: none; }
+    .dropdown-panel .dropdown-item.selected { color: var(--primary); font-weight: 500; }
+    .dropdown-panel .dropdown-item.selected::after {
+      content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
+      font-size: 14px; color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+  <div class="status-bar">
+    <span class="time">9:41</span>
+    <div class="icons">
+      <i class="fas fa-signal"></i>
+      <i class="fas fa-wifi"></i>
+      <i class="fas fa-battery-full"></i>
+    </div>
+  </div>
+
+  <div class="nav-bar">
+    <i class="fas fa-chevron-left back" onclick="goBack()"></i>
+    <span class="title">发起督导</span>
+  </div>
+
+  <div class="page-content" style="padding-bottom:120px;">
+    <div class="form-group" id="fg-date">
+      <div class="form-label"><span class="required">*</span> 督导日期</div>
+      <input type="date" class="form-control" id="formDate" value="2026-07-16">
+      <div class="error-tip" id="err-date"></div>
+    </div>
+
+    <div class="form-group" id="fg-person">
+      <div class="form-label"><span class="required">*</span> 督导人员</div>
+      <div class="select-field" onclick="openDropdown('person')">
+        <span class="select-val" id="personVal">张涵</span>
+        <i class="fas fa-chevron-down select-arrow"></i>
+      </div>
+      <div class="error-tip" id="err-person"></div>
+    </div>
+
+    <div class="form-group" id="fg-method">
+      <div class="form-label"><span class="required">*</span> 督导方式</div>
+      <div class="form-opts" id="optMethod">
+        <div class="opt-chip active" onclick="selectChip(this)">现场检查</div>
+        <div class="opt-chip" onclick="selectChip(this)">书面督导</div>
+        <div class="opt-chip" onclick="selectChip(this)">视频督导</div>
+      </div>
+      <div class="error-tip" id="err-method"></div>
+    </div>
+
+    <div class="form-group" id="fg-assign">
+      <div class="form-label"><span class="required">*</span> 是否交办</div>
+      <div class="form-opts" id="optAssign">
+        <div class="opt-chip" onclick="selectChip(this)">交办</div>
+        <div class="opt-chip active" onclick="selectChip(this)">不交办</div>
+      </div>
+      <div class="error-tip" id="err-assign"></div>
+    </div>
+
+    <div class="form-group" id="fg-target">
+      <div class="form-label"><span class="required">*</span> 督导对象</div>
+      <div class="select-field" onclick="openDropdown('target')">
+        <span class="select-val" id="targetVal">巫山县人民政府</span>
+        <i class="fas fa-chevron-down select-arrow"></i>
+      </div>
+      <div class="error-tip" id="err-target"></div>
+    </div>
+
+    <div class="form-group" id="fg-eval">
+      <div class="form-label"><span class="required">*</span> 核查总体评价</div>
+      <div class="form-opts" id="optEval">
+        <div class="opt-chip active" onclick="selectChip(this)">核查情况基本符合</div>
+        <div class="opt-chip" onclick="selectChip(this)">核查发现整改有差距</div>
+        <div class="opt-chip" onclick="selectChip(this)">核查发现整改不到位</div>
+        <div class="opt-chip" onclick="selectChip(this)">核查发现虚假整改</div>
+      </div>
+      <div class="error-tip" id="err-eval"></div>
+    </div>
+
+    <div class="form-group" id="fg-routine">
+      <div class="form-label"><span class="required">*</span> 市级例行督察</div>
+      <div class="form-opts" id="optRoutine">
+        <div class="opt-chip" onclick="selectChip(this)">是</div>
+        <div class="opt-chip active" onclick="selectChip(this)">否</div>
+      </div>
+      <div class="error-tip" id="err-routine"></div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-label">核查情况</div>
+      <textarea class="form-control" rows="4" placeholder="请输入核查情况（选填）" id="verifyContent"></textarea>
+    </div>
+  </div>
+
+  <div style="position:fixed;bottom:0;left:0;right:0;padding:12px 16px calc(34px + 12px);background:#fff;border-top:0.5px solid #e5e7eb;display:flex;gap:10px;">
+    <button class="btn btn-outline" style="flex:1;" onclick="saveForm()">保存</button>
+    <button class="btn btn-primary" style="flex:1;" onclick="submitForm()">提交审核</button>
+  </div>
+
+  <!-- 下拉选择面板 -->
+  <div class="dropdown-panel" id="dropdownPanel">
+    <div class="dropdown-body">
+      <div class="dropdown-title" id="dropdownTitle">选择督导人员</div>
+      <div class="dropdown-list" id="dropdownList"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <div class="dialog-mask" id="dialogMask">
+    <div class="dialog-box">
+      <div class="dialog-title">提交确认</div>
+      <div class="dialog-msg">确认提交审核？提交后将进入审核流程。</div>
+      <div class="dialog-btns">
+        <button class="btn btn-outline" onclick="closeDialog()">取消</button>
+        <button class="btn btn-primary" onclick="confirmSubmit()">确认</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var currentDropdownType = '';
+    var dropdownData = {
+      person: { title: '选择督导人员', items: ['张涵', '秦莉华', '李明远', '王建国', '刘芳'] },
+      target: { title: '选择督导对象', items: ['巫山县人民政府', '綦江区人民政府', '渝北区生态环境局', '铜梁区人民政府', '合川区人民政府'] }
+    };
+
+    function goBack() {
+      if (document.referrer) { history.back(); }
+      else { location.href = 'problem-list.html'; }
+    }
+
+    function selectChip(el) {
+      var siblings = el.parentElement.querySelectorAll('.opt-chip');
+      siblings.forEach(function(s) { s.classList.remove('active'); });
+      el.classList.add('active');
+      var fg = el.closest('.form-group');
+      if (fg) { fg.classList.remove('has-error'); }
+      var tip = fg ? fg.querySelector('.error-tip') : null;
+      if (tip) { tip.classList.remove('show'); tip.textContent = ''; }
+    }
+
+    function openDropdown(type) {
+      currentDropdownType = type;
+      var data = dropdownData[type];
+      document.getElementById('dropdownTitle').textContent = data.title;
+      var list = document.getElementById('dropdownList');
+      var currentVal = type === 'person'
+        ? document.getElementById('personVal').textContent
+        : document.getElementById('targetVal').textContent;
+      var html = '';
+      data.items.forEach(function(item) {
+        var sel = item === currentVal ? ' selected' : '';
+        html += '<div class="dropdown-item' + sel + '" onclick="selectDropdownItem(this)">' + item + '</div>';
+      });
+      list.innerHTML = html;
+      document.getElementById('dropdownPanel').classList.add('show');
+    }
+
+    function selectDropdownItem(el) {
+      var valEl = currentDropdownType === 'person'
+        ? document.getElementById('personVal')
+        : document.getElementById('targetVal');
+      valEl.textContent = el.textContent;
+      document.getElementById('dropdownPanel').classList.remove('show');
+      showToast('已选择：' + el.textContent);
+      var fgId = currentDropdownType === 'person' ? 'fg-person' : 'fg-target';
+      document.getElementById(fgId).classList.remove('has-error');
+      var tip = document.getElementById(fgId).querySelector('.error-tip');
+      if (tip) { tip.classList.remove('show'); }
+    }
+
+    document.getElementById('dropdownPanel').addEventListener('click', function(e) {
+      if (e.target === this) { this.classList.remove('show'); }
+    });
+
+    function saveForm() { showToast('保存成功'); }
+
+    function validateForm() {
+      var valid = true; var errors = [];
+      document.querySelectorAll('.error-tip').forEach(function(t) { t.classList.remove('show'); t.textContent = ''; });
+      document.querySelectorAll('.form-group').forEach(function(g) { g.classList.remove('has-error'); });
+
+      if (!document.getElementById('formDate').value) {
+        showError('err-date', '请选择督导日期', 'fg-date'); errors.push('督导日期'); valid = false;
+      }
+      if (!document.getElementById('personVal').textContent.trim()) {
+        showError('err-person', '请选择督导人员', 'fg-person'); errors.push('督导人员'); valid = false;
+      }
+      if (!document.querySelector('#optMethod .opt-chip.active')) {
+        showError('err-method', '请选择督导方式', 'fg-method'); errors.push('督导方式'); valid = false;
+      }
+      if (!document.querySelector('#optAssign .opt-chip.active')) {
+        showError('err-assign', '请选择是否交办', 'fg-assign'); errors.push('是否交办'); valid = false;
+      }
+      if (!document.getElementById('targetVal').textContent.trim()) {
+        showError('err-target', '请选择督导对象', 'fg-target'); errors.push('督导对象'); valid = false;
+      }
+      if (!document.querySelector('#optEval .opt-chip.active')) {
+        showError('err-eval', '请选择核查总体评价', 'fg-eval'); errors.push('核查总体评价'); valid = false;
+      }
+      if (!document.querySelector('#optRoutine .opt-chip.active')) {
+        showError('err-routine', '请选择市级例行督察', 'fg-routine'); errors.push('市级例行督察'); valid = false;
+      }
+      if (!valid) {
+        showToast('请完善必填项：' + errors[0]);
+        var firstErr = document.querySelector('.form-group.has-error');
+        if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return valid;
+    }
+
+    function showError(tipId, msg, groupId) {
+      var tip = document.getElementById(tipId);
+      tip.textContent = msg; tip.classList.add('show');
+      document.getElementById(groupId).classList.add('has-error');
+    }
+
+    function submitForm() {
+      if (!validateForm()) return;
+      document.getElementById('dialogMask').classList.add('show');
+    }
+    function closeDialog() { document.getElementById('dialogMask').classList.remove('show'); }
+    function confirmSubmit() { closeDialog(); showToast('提交成功'); }
+
+    function showToast(msg) {
+      var t = document.getElementById('toast');
+      t.textContent = msg; t.classList.add('show');
+      setTimeout(function() { t.classList.remove('show'); }, 1500);
+    }
+  </script>
+</body>
+</html>
