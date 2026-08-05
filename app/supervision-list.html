@@ -264,7 +264,7 @@
     </div>
   </div>
 
-  <div class="add-fab" onclick="location.href='supervision-form.html'">+</div>
+  <div class="add-fab" onclick="location.href='supervision-form.html?from=supervision'">+</div>
 
   <div class="tab-bar">
     <div class="tab-item" onclick="location.href='problem-list.html'"><i class="fas fa-clipboard-list"></i><span>问题</span></div>
@@ -287,7 +287,7 @@
   <div class="toast" id="toast"></div>
 
   <script>
-    function viewDetail(mode) { location.href = 'supervision-form.html'; }
+    function viewDetail(mode) { location.href = 'supervision-form.html?from=supervision'; }
     function submitAudit() { showToast('提交审核成功'); }
     function showConfirm() { document.getElementById('dialogMask').classList.add('show'); }
     function closeDialog() { document.getElementById('dialogMask').classList.remove('show'); }

@@ -44,7 +44,8 @@
   </div>
 
   <div class="page-content" id="listContent">
-    <div class="card">
+    <!-- 第三轮中央督察问题 -->
+    <div class="card" data-category="第三轮中央督察问题">
       <div class="card-title">
         <span class="tag tag-blue">L3ZYDC001</span>
       </div>
@@ -59,11 +60,11 @@
       <div class="field-row"><span class="label">整改时限</span><span class="value">2024年12月底</span></div>
       <div class="action-btns">
         <button class="btn btn-primary" onclick="location.href='inspection-detail.html'">查看</button>
-        <button class="btn btn-outline" onclick="location.href='supervision-form.html'">发起督导</button>
+        <button class="btn btn-outline" onclick="location.href='supervision-form.html?from=inspection'">发起督导</button>
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-category="第三轮中央督察问题">
       <div class="card-title">
         <span class="tag tag-blue">L3ZYDC002</span>
       </div>
@@ -78,7 +79,123 @@
       <div class="field-row"><span class="label">整改时限</span><span class="value">2025年6月底</span></div>
       <div class="action-btns">
         <button class="btn btn-primary" onclick="location.href='inspection-detail.html'">查看</button>
-        <button class="btn btn-outline" onclick="location.href='supervision-form.html'">发起督导</button>
+        <button class="btn btn-outline" onclick="location.href='supervision-form.html?from=inspection'">发起督导</button>
+      </div>
+    </div>
+
+    <!-- 第三轮中央督察投诉 -->
+    <div class="card" data-category="第三轮中央督察投诉" style="display:none;">
+      <div class="card-title">
+        <span class="tag tag-orange">L3ZYTS003</span>
+      </div>
+      <div style="font-size:15px;font-weight:600;margin-bottom:10px;">某化工园区异味扰民投诉</div>
+      <div class="field-row"><span class="label">整改主体</span><span class="value">渝北区人民政府</span></div>
+      <div class="field-row"><span class="label">问题内容</span><span class="value detail-text">群众反映工业园区夜间异味严重，影响周边居民生活…<span class="expand-btn" onclick="toggleExpand(this)">展开</span></span></div>
+      <div class="field-row"><span class="label">整改措施</span><span class="value detail-text">加强园区企业环保监管，安装在线监测设备，限期完成整改…<span class="expand-btn" onclick="toggleExpand(this)">展开</span></span></div>
+      <div class="field-row"><span class="label">问题编号</span><span class="value">TS24093014701</span></div>
+      <div class="field-row"><span class="label">整改状态</span><span class="value"><span class="tag tag-orange">整改中</span></span></div>
+      <div class="field-row"><span class="label">督导状态</span><span class="value"><span class="tag tag-blue">核查中</span></span></div>
+      <div class="field-row"><span class="label">督导后风险</span><span class="value"><span class="tag tag-red">高风险</span></span></div>
+      <div class="field-row"><span class="label">整改时限</span><span class="value">2025年3月底</span></div>
+      <div class="action-btns">
+        <button class="btn btn-primary" onclick="location.href='inspection-detail.html'">查看</button>
+        <button class="btn btn-outline" onclick="location.href='supervision-form.html?from=inspection'">发起督导</button>
+      </div>
+    </div>
+
+    <div class="card" data-category="第三轮中央督察投诉" style="display:none;">
+      <div class="card-title">
+        <span class="tag tag-green">L3ZYTS004</span>
+      </div>
+      <div style="font-size:15px;font-weight:600;margin-bottom:10px;">沙坪坝区餐饮油烟污染投诉</div>
+      <div class="field-row"><span class="label">整改主体</span><span class="value">沙坪坝区城管局</span></div>
+      <div class="field-row"><span class="label">问题内容</span><span class="value detail-text">居民反映楼下餐饮店油烟排放不达标，烟道未定期清洗…<span class="expand-btn" onclick="toggleExpand(this)">展开</span></span></div>
+      <div class="field-row"><span class="label">整改措施</span><span class="value detail-text">责令商家安装高效油烟净化设备，建立定期清洗维护制度…<span class="expand-btn" onclick="toggleExpand(this)">展开</span></span></div>
+      <div class="field-row"><span class="label">问题编号</span><span class="value">TS24093014702</span></div>
+      <div class="field-row"><span class="label">整改状态</span><span class="value"><span class="tag tag-green">已办结</span></span></div>
+      <div class="field-row"><span class="label">督导状态</span><span class="value"><span class="tag tag-green">已核查</span></span></div>
+      <div class="field-row"><span class="label">督导后风险</span><span class="value"><span class="tag tag-green">低风险</span></span></div>
+      <div class="field-row"><span class="label">整改时限</span><span class="value">2024年11月底</span></div>
+      <div class="action-btns">
+        <button class="btn btn-primary" onclick="location.href='inspection-detail.html'">查看</button>
+      </div>
+    </div>
+
+    <!-- 第二轮市级例行督察 -->
+    <div class="card" data-category="第二轮市级例行督察" style="display:none;">
+      <div class="card-title">
+        <span class="tag tag-blue">L2SJDC005</span>
+      </div>
+      <div style="font-size:15px;font-weight:600;margin-bottom:10px;">江津区工业废水处理设施运行不正常</div>
+      <div class="field-row"><span class="label">整改主体</span><span class="value">江津区工业园区管委会</span></div>
+      <div class="field-row"><span class="label">问题内容</span><span class="value detail-text">园区污水处理厂运行管理不规范，出水水质监测数据异常…<span class="expand-btn" onclick="toggleExpand(this)">展开</span></span></div>
+      <div class="field-row"><span class="label">整改措施</span><span class="value detail-text">加强设施维护管理，完善在线监测系统，严格执行排放标准…<span class="expand-btn" onclick="toggleExpand(this)">展开</span></span></div>
+      <div class="field-row"><span class="label">问题编号</span><span class="value">SJ24070112345</span></div>
+      <div class="field-row"><span class="label">整改状态</span><span class="value"><span class="tag tag-orange">整改中</span></span></div>
+      <div class="field-row"><span class="label">督导状态</span><span class="value"><span class="tag tag-gray">未核查</span></span></div>
+      <div class="field-row"><span class="label">督导后风险</span><span class="value"><span class="tag tag-gray">未评估</span></span></div>
+      <div class="field-row"><span class="label">整改时限</span><span class="value">2025年4月底</span></div>
+      <div class="action-btns">
+        <button class="btn btn-primary" onclick="location.href='inspection-detail.html'">查看</button>
+        <button class="btn btn-outline" onclick="location.href='supervision-form.html?from=inspection'">发起督导</button>
+      </div>
+    </div>
+
+    <div class="card" data-category="第二轮市级例行督察" style="display:none;">
+      <div class="card-title">
+        <span class="tag tag-blue">L2SJDC006</span>
+      </div>
+      <div style="font-size:15px;font-weight:600;margin-bottom:10px;">大足区石刻景区周边环境整治滞后</div>
+      <div class="field-row"><span class="label">整改主体</span><span class="value">大足区人民政府</span></div>
+      <div class="field-row"><span class="label">问题内容</span><span class="value detail-text">景区周边违建拆除不彻底，环境卫生管理不到位…<span class="expand-btn" onclick="toggleExpand(this)">展开</span></span></div>
+      <div class="field-row"><span class="label">整改措施</span><span class="value detail-text">全面清理违建，提升景区周边环境品质，建立长效管理机制…<span class="expand-btn" onclick="toggleExpand(this)">展开</span></span></div>
+      <div class="field-row"><span class="label">问题编号</span><span class="value">SJ24070112346</span></div>
+      <div class="field-row"><span class="label">整改状态</span><span class="value"><span class="tag tag-orange">整改中</span></span></div>
+      <div class="field-row"><span class="label">督导状态</span><span class="value"><span class="tag tag-blue">核查中</span></span></div>
+      <div class="field-row"><span class="label">督导后风险</span><span class="value"><span class="tag tag-orange">中风险</span></span></div>
+      <div class="field-row"><span class="label">整改时限</span><span class="value">2025年5月底</span></div>
+      <div class="action-btns">
+        <button class="btn btn-primary" onclick="location.href='inspection-detail.html'">查看</button>
+        <button class="btn btn-outline" onclick="location.href='supervision-form.html?from=inspection'">发起督导</button>
+      </div>
+    </div>
+
+    <!-- 长江警示片 -->
+    <div class="card" data-category="长江警示片" style="display:none;">
+      <div class="card-title">
+        <span class="tag tag-red">CJJSP007</span>
+      </div>
+      <div style="font-size:15px;font-weight:600;margin-bottom:10px;">万州区长江岸线生态修复进度缓慢</div>
+      <div class="field-row"><span class="label">整改主体</span><span class="value">万州区人民政府</span></div>
+      <div class="field-row"><span class="label">问题内容</span><span class="value detail-text">长江经济带警示片指出的岸线生态修复项目推进缓慢…<span class="expand-btn" onclick="toggleExpand(this)">展开</span></span></div>
+      <div class="field-row"><span class="label">整改措施</span><span class="value detail-text">加快岸线复绿工程，拆除违规码头设施，恢复生态功能…<span class="expand-btn" onclick="toggleExpand(this)">展开</span></span></div>
+      <div class="field-row"><span class="label">问题编号</span><span class="value">CJ24050123456</span></div>
+      <div class="field-row"><span class="label">整改状态</span><span class="value"><span class="tag tag-orange">整改中</span></span></div>
+      <div class="field-row"><span class="label">督导状态</span><span class="value"><span class="tag tag-blue">核查中</span></span></div>
+      <div class="field-row"><span class="label">督导后风险</span><span class="value"><span class="tag tag-red">高风险</span></span></div>
+      <div class="field-row"><span class="label">整改时限</span><span class="value">2025年8月底</span></div>
+      <div class="action-btns">
+        <button class="btn btn-primary" onclick="location.href='inspection-detail.html'">查看</button>
+        <button class="btn btn-outline" onclick="location.href='supervision-form.html?from=inspection'">发起督导</button>
+      </div>
+    </div>
+
+    <div class="card" data-category="长江警示片" style="display:none;">
+      <div class="card-title">
+        <span class="tag tag-orange">CJJSP008</span>
+      </div>
+      <div style="font-size:15px;font-weight:600;margin-bottom:10px;">涪陵区化工企业环境风险隐患整改</div>
+      <div class="field-row"><span class="label">整改主体</span><span class="value">涪陵区应急管理局</span></div>
+      <div class="field-row"><span class="label">问题内容</span><span class="value detail-text">化工园区部分企业环境应急预案不完善，风险防控措施不到位…<span class="expand-btn" onclick="toggleExpand(this)">展开</span></span></div>
+      <div class="field-row"><span class="label">整改措施</span><span class="value detail-text">完善环境应急预案，开展应急演练，加强风险源管控…<span class="expand-btn" onclick="toggleExpand(this)">展开</span></span></div>
+      <div class="field-row"><span class="label">问题编号</span><span class="value">CJ24050123457</span></div>
+      <div class="field-row"><span class="label">整改状态</span><span class="value"><span class="tag tag-orange">整改中</span></span></div>
+      <div class="field-row"><span class="label">督导状态</span><span class="value"><span class="tag tag-gray">未核查</span></span></div>
+      <div class="field-row"><span class="label">督导后风险</span><span class="value"><span class="tag tag-orange">中风险</span></span></div>
+      <div class="field-row"><span class="label">整改时限</span><span class="value">2025年7月底</span></div>
+      <div class="action-btns">
+        <button class="btn btn-primary" onclick="location.href='inspection-detail.html'">查看</button>
+        <button class="btn btn-outline" onclick="location.href='supervision-form.html?from=inspection'">发起督导</button>
       </div>
     </div>
   </div>
@@ -103,8 +220,8 @@
   </div>
 
   <!-- 筛选面板 -->
-  <div class="filter-panel" id="filterPanel">
-    <div class="panel-body">
+  <div class="filter-panel" id="filterPanel" onclick="hideFilter()">
+    <div class="panel-body" onclick="event.stopPropagation()">
       <div class="panel-title">更多查询条件</div>
       <div class="option-group">
         <div class="option-label">督导单位/责任单位</div>
@@ -198,6 +315,7 @@
         btn.textContent = '展开';
       }
     }
+    
     document.querySelectorAll('.opt-item').forEach(item => {
       item.addEventListener('click', function() {
         const siblings = this.parentElement.querySelectorAll('.opt-item');
@@ -205,12 +323,28 @@
         this.classList.add('active');
       });
     });
-    document.querySelectorAll('.cat-item').forEach(item => {
+    
+    document.querySelectorAll('.cat-item').forEach((item, index) => {
       item.addEventListener('click', function() {
         document.querySelectorAll('.cat-item').forEach(c => c.classList.remove('active'));
         this.classList.add('active');
+        
+        const categories = ['全部类型', '第三轮中央督察问题', '第三轮中央督察投诉', '第二轮市级例行督察', '长江警示片'];
+        const selectedCategory = categories[index];
+        
+        document.querySelectorAll('#listContent .card').forEach(card => {
+          const cardCategory = card.getAttribute('data-category');
+          if (selectedCategory === '全部类型') {
+            card.style.display = 'block';
+          } else if (cardCategory === selectedCategory) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
       });
     });
+    
     document.getElementById('searchInput').addEventListener('input', function() {
       if (!this.value) showToast('已清空搜索');
     });

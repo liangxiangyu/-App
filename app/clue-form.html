@@ -6,6 +6,73 @@
   <title>线索表单</title>
   <link rel="stylesheet" href="shared.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .form-opts { display: flex; gap: 8px; flex-wrap: wrap; }
+    .form-opts .opt-chip {
+      padding: 8px 16px;
+      background: var(--bg-page);
+      border-radius: 20px;
+      font-size: 13px;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      transition: all .15s;
+      color: var(--text-secondary);
+    }
+    .form-opts .opt-chip:active { transform: scale(0.96); }
+    .form-opts .opt-chip.active {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: var(--primary);
+      font-weight: 500;
+    }
+    .select-field {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: #fff;
+      cursor: pointer;
+      transition: border-color .2s;
+    }
+    .select-field:active { border-color: var(--primary); }
+    .select-field .select-val { font-size: 14px; color: var(--text-primary); }
+    .select-field .select-placeholder { font-size: 14px; color: var(--text-tertiary); }
+    .select-field .select-arrow { font-size: 12px; color: var(--text-tertiary); }
+    .dropdown-panel {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.4); z-index: 200; display: none;
+    }
+    .dropdown-panel.show { display: block; }
+    .dropdown-panel .dropdown-body {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: var(--bg-card);
+      border-radius: 20px 20px 0 0;
+      padding: 20px 16px calc(34px + 16px);
+      max-height: 50vh; overflow-y: auto;
+      animation: slideUp .25s ease-out;
+    }
+    .dropdown-panel .dropdown-title {
+      font-size: 16px; font-weight: 600;
+      text-align: center; margin-bottom: 16px;
+    }
+    .dropdown-panel .dropdown-list { padding: 0; }
+    .dropdown-panel .dropdown-item {
+      padding: 14px 16px;
+      font-size: 15px;
+      border-bottom: 0.5px solid var(--border-light);
+      display: flex; align-items: center; justify-content: space-between;
+      cursor: pointer; transition: background .15s;
+    }
+    .dropdown-panel .dropdown-item:active { background: var(--bg-page); }
+    .dropdown-panel .dropdown-item:last-child { border-bottom: none; }
+    .dropdown-panel .dropdown-item.selected { color: var(--primary); font-weight: 500; }
+    .dropdown-panel .dropdown-item.selected::after {
+      content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
+      font-size: 14px; color: var(--primary);
+    }
+  </style>
 </head>
 <body>
   <div class="status-bar">
@@ -39,26 +106,26 @@
       </div>
       <div class="form-group">
         <div class="form-label"><span class="required">*</span> 行政区划</div>
-        <div class="form-control form-select" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;" onclick="showPicker('行政区划')">
-          <span id="regionVal">铜梁</span>
-          <i class="fas fa-chevron-right" style="font-size:12px;color:var(--text-tertiary);"></i>
+        <div class="select-field" onclick="openDropdown('region')">
+          <span class="select-val" id="regionVal">铜梁</span>
+          <i class="fas fa-chevron-down select-arrow"></i>
         </div>
       </div>
       <div class="form-group">
         <div class="form-label"><span class="required">*</span> 领域</div>
-        <div class="form-control form-select" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;" onclick="showPicker('领域')">
-          <span id="domainVal">自然生态保护和修复</span>
-          <i class="fas fa-chevron-right" style="font-size:12px;color:var(--text-tertiary);"></i>
+        <div class="select-field" onclick="openDropdown('domain')">
+          <span class="select-val" id="domainVal">自然生态保护和修复</span>
+          <i class="fas fa-chevron-down select-arrow"></i>
         </div>
       </div>
       <div class="form-group">
         <div class="form-label"><span class="required">*</span> 来源</div>
-        <div class="options" id="optSource0" style="display:flex;gap:8px;flex-wrap:wrap;">
-          <div class="opt-item active" onclick="selectOpt(this)">督察发现</div>
-          <div class="opt-item" onclick="selectOpt(this)">信访投诉</div>
-          <div class="opt-item" onclick="selectOpt(this)">媒体曝光</div>
-          <div class="opt-item" onclick="selectOpt(this)">群众举报</div>
-          <div class="opt-item" onclick="selectOpt(this)">其他</div>
+        <div class="form-opts" id="optSource0">
+          <div class="opt-chip active" onclick="selectChip(this)">督察发现</div>
+          <div class="opt-chip" onclick="selectChip(this)">信访投诉</div>
+          <div class="opt-chip" onclick="selectChip(this)">媒体曝光</div>
+          <div class="opt-chip" onclick="selectChip(this)">群众举报</div>
+          <div class="opt-chip" onclick="selectChip(this)">其他</div>
         </div>
       </div>
       <div class="form-group">
@@ -106,34 +173,34 @@
       </div>
       <div class="form-group">
         <div class="form-label"><span class="required">*</span> 来源</div>
-        <div class="options" id="optSource1" style="display:flex;gap:8px;flex-wrap:wrap;">
-          <div class="opt-item active" onclick="selectOpt(this)">网络媒体</div>
-          <div class="opt-item" onclick="selectOpt(this)">社交平台</div>
-          <div class="opt-item" onclick="selectOpt(this)">论坛社区</div>
+        <div class="form-opts" id="optSource1">
+          <div class="opt-chip active" onclick="selectChip(this)">网络媒体</div>
+          <div class="opt-chip" onclick="selectChip(this)">社交平台</div>
+          <div class="opt-chip" onclick="selectChip(this)">论坛社区</div>
         </div>
       </div>
       <div class="form-group">
         <div class="form-label">媒体分类</div>
-        <div class="options" style="display:flex;gap:8px;flex-wrap:wrap;">
-          <div class="opt-item" onclick="selectOpt(this)">中央媒体</div>
-          <div class="opt-item" onclick="selectOpt(this)">地方媒体</div>
-          <div class="opt-item" onclick="selectOpt(this)">自媒体</div>
+        <div class="form-opts">
+          <div class="opt-chip" onclick="selectChip(this)">中央媒体</div>
+          <div class="opt-chip" onclick="selectChip(this)">地方媒体</div>
+          <div class="opt-chip" onclick="selectChip(this)">自媒体</div>
         </div>
       </div>
       <div class="form-group">
         <div class="form-label"><span class="required">*</span> 行政区划</div>
-        <div class="form-control form-select" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;" onclick="showPicker('行政区划')">
-          <span id="opRegionVal" style="color:var(--text-tertiary);">请选择行政区划</span>
-          <i class="fas fa-chevron-right" style="font-size:12px;color:var(--text-tertiary);"></i>
+        <div class="select-field" onclick="openDropdown('opRegion')">
+          <span class="select-placeholder" id="opRegionVal">请选择行政区划</span>
+          <i class="fas fa-chevron-down select-arrow"></i>
         </div>
       </div>
       <div class="form-group">
         <div class="form-label">污染源领域</div>
-        <div class="options" style="display:flex;gap:8px;flex-wrap:wrap;">
-          <div class="opt-item" onclick="selectOpt(this)">水污染</div>
-          <div class="opt-item" onclick="selectOpt(this)">大气污染</div>
-          <div class="opt-item" onclick="selectOpt(this)">固体废物</div>
-          <div class="opt-item" onclick="selectOpt(this)">噪声污染</div>
+        <div class="form-opts">
+          <div class="opt-chip" onclick="selectChip(this)">水污染</div>
+          <div class="opt-chip" onclick="selectChip(this)">大气污染</div>
+          <div class="opt-chip" onclick="selectChip(this)">固体废物</div>
+          <div class="opt-chip" onclick="selectChip(this)">噪声污染</div>
         </div>
       </div>
       <div class="form-group">
@@ -161,20 +228,10 @@
     <button class="btn btn-primary" style="flex:1;" onclick="submitForm()">保存并提交</button>
   </div>
 
-  <div class="filter-panel" id="pickerPanel">
-    <div class="panel-body">
-      <div class="panel-title" id="pickerTitle">选择</div>
-      <div style="padding:16px 0;" id="pickerOpts">
-        <div class="opt-item" style="margin:4px;display:inline-block;" onclick="selectPickerItem(this)">铜梁</div>
-        <div class="opt-item" style="margin:4px;display:inline-block;" onclick="selectPickerItem(this)">渝北</div>
-        <div class="opt-item" style="margin:4px;display:inline-block;" onclick="selectPickerItem(this)">巫山</div>
-        <div class="opt-item" style="margin:4px;display:inline-block;" onclick="selectPickerItem(this)">綦江</div>
-        <div class="opt-item" style="margin:4px;display:inline-block;" onclick="selectPickerItem(this)">合川</div>
-      </div>
-      <div class="panel-actions">
-        <button class="btn btn-outline" style="flex:1;" onclick="closePicker()">取消</button>
-        <button class="btn btn-primary" style="flex:1;" onclick="confirmPicker()">确定</button>
-      </div>
+  <div class="dropdown-panel" id="dropdownPanel">
+    <div class="dropdown-body">
+      <div class="dropdown-title" id="dropdownTitle">选择</div>
+      <div class="dropdown-list" id="dropdownList"></div>
     </div>
   </div>
 
@@ -182,7 +239,21 @@
 
   <script>
     var currentSourceIdx = 0;
-    var currentPickerField = '';
+    var currentDropdownType = '';
+    var dropdownData = {
+      region: { 
+        title: '选择行政区划', 
+        items: ['铜梁', '渝北', '巫山', '綦江', '合川', '江津', '大足', '万州', '涪陵', '沙坪坝']
+      },
+      opRegion: { 
+        title: '选择行政区划', 
+        items: ['铜梁', '渝北', '巫山', '綦江', '合川', '江津', '大足', '万州', '涪陵', '沙坪坝']
+      },
+      domain: {
+        title: '选择领域',
+        items: ['自然生态保护和修复', '水污染防治', '大气污染防治', '固体废物污染防治', '噪声污染防治', '土壤污染防治']
+      }
+    };
 
     function switchSource(idx, el) {
       currentSourceIdx = idx;
@@ -192,43 +263,59 @@
       document.getElementById('formSource1').style.display = idx === 1 ? 'block' : 'none';
     }
 
-    function selectOpt(el) {
-      var siblings = el.parentElement.querySelectorAll('.opt-item');
+    function selectChip(el) {
+      var siblings = el.parentElement.querySelectorAll('.opt-chip');
       siblings.forEach(function(s) { s.classList.remove('active'); });
       el.classList.add('active');
     }
 
-    function showPicker(field) {
-      currentPickerField = field;
-      document.getElementById('pickerTitle').textContent = '选择' + field;
-      document.getElementById('pickerPanel').classList.add('show');
-    }
-
-    function closePicker() {
-      document.getElementById('pickerPanel').classList.remove('show');
-    }
-
-    function selectPickerItem(el) {
-      el.parentElement.querySelectorAll('.opt-item').forEach(function(s) { s.classList.remove('active'); });
-      el.classList.add('active');
-    }
-
-    function confirmPicker() {
-      var selected = document.querySelector('#pickerOpts .opt-item.active');
-      if (selected) {
-        if (currentPickerField === '行政区划') {
-          if (currentSourceIdx === 0) {
-            document.getElementById('regionVal').textContent = selected.textContent;
-          } else {
-            var opR = document.getElementById('opRegionVal');
-            opR.textContent = selected.textContent;
-            opR.style.color = 'var(--text-primary)';
-          }
-        }
+    function openDropdown(type) {
+      currentDropdownType = type;
+      var data = dropdownData[type];
+      document.getElementById('dropdownTitle').textContent = data.title;
+      var list = document.getElementById('dropdownList');
+      var currentVal = '';
+      
+      if (type === 'region') {
+        currentVal = document.getElementById('regionVal').textContent;
+      } else if (type === 'domain') {
+        currentVal = document.getElementById('domainVal').textContent;
+      } else if (type === 'opRegion') {
+        var opVal = document.getElementById('opRegionVal');
+        currentVal = opVal.classList.contains('select-placeholder') ? '' : opVal.textContent;
       }
-      closePicker();
-      showToast('已选择');
+      
+      var html = '';
+      data.items.forEach(function(item) {
+        var sel = item === currentVal ? ' selected' : '';
+        html += '<div class="dropdown-item' + sel + '" onclick="selectDropdownItem(this)">' + item + '</div>';
+      });
+      list.innerHTML = html;
+      document.getElementById('dropdownPanel').classList.add('show');
     }
+
+    function selectDropdownItem(el) {
+      var valEl;
+      if (currentDropdownType === 'region') {
+        valEl = document.getElementById('regionVal');
+        valEl.textContent = el.textContent;
+      } else if (currentDropdownType === 'domain') {
+        valEl = document.getElementById('domainVal');
+        valEl.textContent = el.textContent;
+      } else if (currentDropdownType === 'opRegion') {
+        valEl = document.getElementById('opRegionVal');
+        valEl.textContent = el.textContent;
+        valEl.classList.remove('select-placeholder');
+        valEl.classList.add('select-val');
+      }
+      
+      document.getElementById('dropdownPanel').classList.remove('show');
+      showToast('已选择：' + el.textContent);
+    }
+
+    document.getElementById('dropdownPanel').addEventListener('click', function(e) {
+      if (e.target === this) { this.classList.remove('show'); }
+    });
 
     function saveForm() { showToast('保存成功'); }
 
@@ -244,9 +331,14 @@
         var opTitle = document.getElementById('opTitle');
         var opContent = document.getElementById('opContent');
         var opTime = document.getElementById('opTime');
+        var opRegionEl = document.getElementById('opRegionVal');
         if (!opTime.value) { showToast('请选择时间'); return; }
         if (!opTitle.value.trim()) { showToast('请输入舆情标题'); opTitle.focus(); return; }
         if (!opContent.value.trim()) { showToast('请输入舆情内容'); opContent.focus(); return; }
+        if (opRegionEl.classList.contains('select-placeholder')) { 
+          showToast('请选择行政区划'); 
+          return; 
+        }
       }
       showToast('提交成功');
     }

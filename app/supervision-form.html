@@ -195,8 +195,27 @@
     };
 
     function goBack() {
-      if (document.referrer) { history.back(); }
-      else { location.href = 'problem-list.html'; }
+      // 获取URL参数
+      var urlParams = new URLSearchParams(window.location.search);
+      var from = urlParams.get('from');
+      
+      // 根据来源参数返回到对应页面
+      if (from === 'problem') {
+        location.href = 'problem-list.html';
+      } else if (from === 'clue') {
+        location.href = 'clue-list.html';
+      } else if (from === 'inspection') {
+        location.href = 'inspection-list.html';
+      } else if (from === 'supervision') {
+        location.href = 'supervision-list.html';
+      } else {
+        // 兼容旧链接和直接访问，尝试使用浏览器返回
+        if (document.referrer && document.referrer.indexOf(window.location.origin) !== -1) {
+          history.back();
+        } else {
+          location.href = 'supervision-list.html';
+        }
+      }
     }
 
     function selectChip(el) {

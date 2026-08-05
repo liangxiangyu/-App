@@ -49,7 +49,7 @@
       <div class="field-row"><span class="label">发现情况</span><span class="value">现场核查发现相关设施未按要求处置</span></div>
       <div class="action-btns">
         <button class="btn btn-primary" onclick="location.href='clue-detail.html'">查看</button>
-        <button class="btn btn-outline" onclick="location.href='supervision-form.html'">现场核查</button>
+        <button class="btn btn-outline" onclick="location.href='supervision-form.html?from=clue'">现场核查</button>
         <button class="btn btn-danger" onclick="showConfirm('撤回','确定撤回该线索？撤回后状态将变为草稿。','withdraw')">撤回</button>
       </div>
     </div>
@@ -75,10 +75,7 @@
   </div>
 
   <!-- 新增按钮 -->
-  <!-- <div class="fab" onclick="location.href='clue-form.html'">
-    <i class="fas fa-plus"></i>
-  </div> -->
-  <div class="add-fab" onclick="location.href='supervision-form.html'">+</div>
+  <div class="add-fab" onclick="location.href='clue-form.html'">+</div>
 
   <!-- 底部 TabBar -->
   <div class="tab-bar">
@@ -101,8 +98,8 @@
   </div>
 
   <!-- 筛选面板 -->
-  <div class="filter-panel" id="filterPanel">
-    <div class="panel-body">
+  <div class="filter-panel" id="filterPanel" onclick="hideFilter()">
+    <div class="panel-body" onclick="event.stopPropagation()">
       <div class="panel-title">更多查询条件</div>
       <div class="option-group">
         <div class="option-label">行政区划</div>
