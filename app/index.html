@@ -37,103 +37,40 @@
     .qr-panel {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 20px;
       background: #fff;
-      padding: 14px 18px;
+      padding: 20px 24px;
       border-radius: 12px;
       box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
       flex-shrink: 0;
     }
-    .qr-wrapper {
-      position: relative;
-      width: 120px;
-      height: 120px;
-      flex-shrink: 0;
-    }
-    .qr-canvas {
+    .qr-image {
+      width: 140px;
+      height: 140px;
       display: block;
-      border-radius: 6px;
+      border-radius: 8px;
       border: 2px solid #f0f0f0;
-    }
-    .qr-placeholder {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 120px;
-      height: 120px;
+      flex-shrink: 0;
       background: #f8f9fa;
-      border: 2px dashed #ddd;
-      border-radius: 6px;
+    }
+    .qr-info {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 12px;
+      gap: 10px;
+      max-width: 220px;
     }
-    .qr-placeholder.hidden {
-      display: none;
-    }
-    .qr-placeholder-icon {
-      font-size: 28px;
-      margin-bottom: 6px;
-      color: #999;
-    }
-    .qr-placeholder-text {
-      font-size: 10px;
-      color: #666;
-      line-height: 1.3;
-    }
-    .qr-controls {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      min-width: 280px;
-    }
-    .qr-label {
-      font-size: 13px;
+    .qr-title {
+      font-size: 15px;
       color: #333;
       font-weight: 600;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
-    .qr-input {
-      width: 100%;
-      padding: 8px 12px;
-      border: 1.5px solid #ddd;
-      border-radius: 6px;
-      font-size: 12px;
-      outline: none;
-      transition: all 0.2s;
-    }
-    .qr-input:focus {
-      border-color: #2563eb;
-      box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
-    }
-    .qr-btn {
-      padding: 8px 16px;
-      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      font-size: 12px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: transform 0.2s;
-      box-shadow: 0 2px 8px rgba(37,99,235,0.3);
-    }
-    .qr-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(37,99,235,0.4);
-    }
-    .qr-btn:active {
-      transform: translateY(0);
-    }
-    .qr-tip {
-      font-size: 10px;
-      color: #888;
-      line-height: 1.4;
+    .qr-desc {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.6;
     }
     .grid {
       display: flex;
@@ -195,23 +132,10 @@
       <p class="subtitle">iPhone 16 Pro · 360×780 逻辑视口 · 点击各界面可交互</p>
     </div>
     <div class="qr-panel">
-      <div class="qr-wrapper">
-        <canvas class="qr-canvas" id="qrCanvas" width="120" height="120"></canvas>
-        <div class="qr-placeholder" id="qrPlaceholder">
-          <div class="qr-placeholder-icon">📱</div>
-          <div class="qr-placeholder-text">输入网址<br>生成二维码</div>
-        </div>
-      </div>
-      <div class="qr-controls">
-        <div class="qr-label">📱 手机扫码预览</div>
-        <input 
-          type="text" 
-          class="qr-input" 
-          id="qrInput" 
-          placeholder="https://your-site.netlify.app/preview.html"
-        >
-        <button class="qr-btn" onclick="updateQR()">🚀 生成二维码</button>
-        <div class="qr-tip">💡 部署教程：Netlify部署指南.html</div>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://liangxiangyu.github.io/-App/app/preview.html" alt="扫码预览" class="qr-image">
+      <div class="qr-info">
+        <div class="qr-title">📱 手机扫码预览</div>
+        <div class="qr-desc">使用微信或浏览器扫描左侧二维码，即可在手机端查看完整原型并交互</div>
       </div>
     </div>
   </header>
@@ -269,99 +193,5 @@
       <span class="phone-label">督察支持</span>
     </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
-  <script>
-    function showPlaceholder(show) {
-      var placeholder = document.getElementById('qrPlaceholder');
-      if (show) {
-        placeholder.classList.remove('hidden');
-      } else {
-        placeholder.classList.add('hidden');
-      }
-    }
-
-    function generateQRCode(url) {
-      var canvas = document.getElementById('qrCanvas');
-      
-      if (!url || url.includes('your-site') || url.includes('your-username') || url.includes('your-domain')) {
-        showPlaceholder(true);
-        return;
-      }
-      
-      try {
-        QRCode.toCanvas(canvas, url, {
-          width: 120,
-          margin: 1,
-          color: { dark: '#000000', light: '#ffffff' }
-        }, function (error) {
-          if (error) {
-            console.error(error);
-            alert('二维码生成失败：' + error.message);
-            showPlaceholder(true);
-          } else {
-            showPlaceholder(false);
-            localStorage.setItem('qr_url', url);
-          }
-        });
-      } catch (err) {
-        alert('二维码生成失败：' + err.message);
-        showPlaceholder(true);
-      }
-    }
-
-    function updateQR() {
-      var input = document.getElementById('qrInput');
-      var url = input.value.trim();
-      
-      if (!url) {
-        alert('❌ 请输入有效的网址');
-        return;
-      }
-      
-      if (!url.startsWith('http://') && !url.startsWith('https://')) {
-        url = 'https://' + url;
-        input.value = url;
-      }
-      
-      if (!url.endsWith('preview.html')) {
-        alert('⚠️ 建议输入 preview.html 的完整地址\n例如：https://your-site.netlify.app/preview.html');
-      }
-      
-      generateQRCode(url);
-      
-      if (!url.includes('your-site') && !url.includes('your-username')) {
-        alert('✅ 二维码已生成！\n扫码后可在手机端预览所有页面');
-      }
-    }
-
-    function init() {
-      var savedUrl = localStorage.getItem('qr_url');
-      if (savedUrl) {
-        document.getElementById('qrInput').value = savedUrl;
-        generateQRCode(savedUrl);
-      } else {
-        showPlaceholder(true);
-      }
-    }
-
-    document.getElementById('qrInput').addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') {
-        updateQR();
-      }
-    });
-
-    if (typeof QRCode !== 'undefined') {
-      init();
-    } else {
-      var script = document.querySelector('script[src*="qrcode"]');
-      if (script) {
-        script.addEventListener('load', init);
-        script.addEventListener('error', function() {
-          alert('⚠️ 二维码库加载失败，请检查网络连接');
-          showPlaceholder(true);
-        });
-      }
-    }
-  </script>
 </body>
 </html>

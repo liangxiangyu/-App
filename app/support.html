@@ -39,38 +39,67 @@
   </div>
 
   <!-- 文件列表 -->
-  <div class="page-content">
-    <div class="file-item">
+  <div class="page-content" id="fileList">
+    <!-- 全部文件 -->
+    <div class="file-item" data-category="整改方案">
       <div class="file-icon pdf"><i class="fas fa-file-pdf"></i></div>
       <div class="file-name">4.关于合川区2025年春节期间燃放烟花爆竹管控不力…整改方案.pdf</div>
     </div>
-    <div class="file-item">
+    <div class="file-item" data-category="约谈纪要">
       <div class="file-icon doc"><i class="fas fa-file-word"></i></div>
       <div class="file-name">2.约谈纪要 (2025-1).doc</div>
     </div>
-    <div class="file-item">
+    <div class="file-item" data-category="整改方案">
       <div class="file-icon pdf"><i class="fas fa-file-pdf"></i></div>
       <div class="file-name">3.綦江区矿井水整治效果巩固方案（2025修订版）.pdf</div>
     </div>
-    <div class="file-item">
+    <div class="file-item" data-category="督办函">
       <div class="file-icon doc"><i class="fas fa-file-word"></i></div>
       <div class="file-name">1.巫山县饮用水源保护区码头搬迁督办函.docx</div>
     </div>
-    <div class="file-item">
+    <div class="file-item" data-category="整改方案">
       <div class="file-icon pdf"><i class="fas fa-file-pdf"></i></div>
       <div class="file-name">5.铜梁区安居湿地公园生态修复专项方案.pdf</div>
     </div>
-    <div class="file-item">
+    <div class="file-item" data-category="会议纪要">
       <div class="file-icon doc"><i class="fas fa-file-word"></i></div>
       <div class="file-name">6.2026年第三批次督察工作会议纪要.doc</div>
     </div>
-    <div class="file-item">
+    <div class="file-item" data-category="整改方案">
       <div class="file-icon pdf"><i class="fas fa-file-pdf"></i></div>
       <div class="file-name">7.渝北区雷达导航塔辐射监测报告.pdf</div>
     </div>
-    <div class="file-item">
+    <div class="file-item" data-category="整改方案">
       <div class="file-icon doc"><i class="fas fa-file-word"></i></div>
       <div class="file-name">8.长江经济带生态环境警示片问题整改台账.docx</div>
+    </div>
+    <div class="file-item" data-category="约谈纪要">
+      <div class="file-icon doc"><i class="fas fa-file-word"></i></div>
+      <div class="file-name">9.綦江区政府主要负责人约谈记录(2026-07).docx</div>
+    </div>
+    <div class="file-item" data-category="督办函">
+      <div class="file-icon pdf"><i class="fas fa-file-pdf"></i></div>
+      <div class="file-name">10.关于合川区燃放烟花爆竹管控问题督办函.pdf</div>
+    </div>
+    <div class="file-item" data-category="会议纪要">
+      <div class="file-icon doc"><i class="fas fa-file-word"></i></div>
+      <div class="file-name">11.中央第三轮督察问题推进会会议纪要.doc</div>
+    </div>
+    <div class="file-item" data-category="督办函">
+      <div class="file-icon doc"><i class="fas fa-file-word"></i></div>
+      <div class="file-name">12.渝北区工业园区噪声污染整改督办函.docx</div>
+    </div>
+    <div class="file-item" data-category="整改方案">
+      <div class="file-icon pdf"><i class="fas fa-file-pdf"></i></div>
+      <div class="file-name">13.巫山县水源地保护区综合整治方案.pdf</div>
+    </div>
+    <div class="file-item" data-category="约谈纪要">
+      <div class="file-icon doc"><i class="fas fa-file-word"></i></div>
+      <div class="file-name">14.铜梁区生态环境局负责人约谈纪要.doc</div>
+    </div>
+    <div class="file-item" data-category="会议纪要">
+      <div class="file-icon pdf"><i class="fas fa-file-pdf"></i></div>
+      <div class="file-name">15.2026年上半年督察工作总结会议纪要.pdf</div>
     </div>
   </div>
 
@@ -97,17 +126,33 @@
   <div class="toast" id="toast"></div>
 
   <script>
-    document.querySelectorAll('.cat-item').forEach(item => {
+    document.querySelectorAll('.cat-item').forEach((item, index) => {
       item.addEventListener('click', function() {
         document.querySelectorAll('.cat-item').forEach(c => c.classList.remove('active'));
         this.classList.add('active');
+        
+        var categories = ['全部', '整改方案', '约谈纪要', '督办函', '会议纪要'];
+        var selectedCategory = categories[index];
+        
+        document.querySelectorAll('#fileList .file-item').forEach(file => {
+          var fileCategory = file.getAttribute('data-category');
+          if (selectedCategory === '全部') {
+            file.style.display = 'flex';
+          } else if (fileCategory === selectedCategory) {
+            file.style.display = 'flex';
+          } else {
+            file.style.display = 'none';
+          }
+        });
       });
     });
+    
     document.getElementById('searchInput').addEventListener('input', function() {
       if (!this.value) {
         showToast('已清空搜索');
       }
     });
+    
     function showToast(msg) {
       const t = document.getElementById('toast');
       t.textContent = msg;

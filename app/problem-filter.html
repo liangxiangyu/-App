@@ -6,6 +6,16 @@
   <title>更多查询条件</title>
   <link rel="stylesheet" href="shared.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      background: var(--bg-page);
+    }
+    .page-content {
+      background: var(--bg-card);
+      min-height: calc(100vh - var(--safe-top) - 44px);
+      padding: 16px 16px 100px;
+    }
+  </style>
 </head>
 <body>
   <div class="status-bar">
@@ -22,80 +32,78 @@
     <span class="title">更多查询条件</span>
   </div>
 
-  <div class="page-content" style="padding-bottom:100px;">
-    <div style="padding:16px;">
-      <div class="option-group">
-        <div class="option-label">督导单位</div>
-        <div class="options">
-          <div class="opt-item active">全部</div>
-          <div class="opt-item">督察一处</div>
-          <div class="opt-item">督察二处</div>
-          <div class="opt-item">督察三处</div>
-        </div>
+  <div class="page-content">
+    <div class="option-group">
+      <div class="option-label">督导单位</div>
+      <div class="options">
+        <div class="opt-item active">全部</div>
+        <div class="opt-item">督察一处</div>
+        <div class="opt-item">督察二处</div>
+        <div class="opt-item">督察三处</div>
       </div>
+    </div>
 
-      <div class="option-group">
-        <div class="option-label">问题来源</div>
-        <div class="options">
-          <div class="opt-item active">全部</div>
-          <div class="opt-item">第三轮中央督察</div>
-          <div class="opt-item">第二轮中央督察</div>
-          <div class="opt-item">第一轮中央督察</div>
-          <div class="opt-item">长江经济带警示片</div>
-        </div>
+    <div class="option-group">
+      <div class="option-label">问题来源</div>
+      <div class="options">
+        <div class="opt-item active">全部</div>
+        <div class="opt-item">第三轮中央督察</div>
+        <div class="opt-item">第二轮中央督察</div>
+        <div class="opt-item">第一轮中央督察</div>
+        <div class="opt-item">长江经济带警示片</div>
       </div>
+    </div>
 
-      <div class="option-group">
-        <div class="option-label">发生领域</div>
-        <div class="options">
-          <div class="opt-item active">全部</div>
-          <div class="opt-item">饮用水水源地生态环境保护</div>
-          <div class="opt-item">矿产资源合理利用和保护</div>
-          <div class="opt-item">自然生态保护和修复</div>
-          <div class="opt-item">大气污染防治</div>
-          <div class="opt-item">水污染防治</div>
-        </div>
+    <div class="option-group">
+      <div class="option-label">发生领域</div>
+      <div class="options">
+        <div class="opt-item active">全部</div>
+        <div class="opt-item">饮用水水源地生态环境保护</div>
+        <div class="opt-item">矿产资源合理利用和保护</div>
+        <div class="opt-item">自然生态保护和修复</div>
+        <div class="opt-item">大气污染防治</div>
+        <div class="opt-item">水污染防治</div>
       </div>
+    </div>
 
-      <div class="option-group">
-        <div class="option-label">整改状态</div>
-        <div class="options">
-          <div class="opt-item active">全部</div>
-          <div class="opt-item">未整改</div>
-          <div class="opt-item">整改中</div>
-          <div class="opt-item">已办结</div>
-        </div>
+    <div class="option-group">
+      <div class="option-label">整改状态</div>
+      <div class="options">
+        <div class="opt-item active">全部</div>
+        <div class="opt-item">未整改</div>
+        <div class="opt-item">整改中</div>
+        <div class="opt-item">已办结</div>
       </div>
+    </div>
 
-      <div class="option-group">
-        <div class="option-label">临期超期情况</div>
-        <div class="options">
-          <div class="opt-item active">全部</div>
-          <div class="opt-item">正常</div>
-          <div class="opt-item">临期</div>
-          <div class="opt-item">超期</div>
-        </div>
+    <div class="option-group">
+      <div class="option-label">临期超期情况</div>
+      <div class="options">
+        <div class="opt-item active">全部</div>
+        <div class="opt-item">正常</div>
+        <div class="opt-item">临期</div>
+        <div class="opt-item">超期</div>
       </div>
+    </div>
 
-      <div class="option-group">
-        <div class="option-label">督导状态</div>
-        <div class="options">
-          <div class="opt-item active">全部</div>
-          <div class="opt-item">未核查</div>
-          <div class="opt-item">核查中</div>
-          <div class="opt-item">已核查</div>
-        </div>
+    <div class="option-group">
+      <div class="option-label">督导状态</div>
+      <div class="options">
+        <div class="opt-item active">全部</div>
+        <div class="opt-item">未核查</div>
+        <div class="opt-item">核查中</div>
+        <div class="opt-item">已核查</div>
       </div>
+    </div>
 
-      <div class="option-group">
-        <div class="option-label">督导后风险</div>
-        <div class="options">
-          <div class="opt-item active">全部</div>
-          <div class="opt-item">未评估</div>
-          <div class="opt-item">低风险</div>
-          <div class="opt-item">中风险</div>
-          <div class="opt-item">高风险</div>
-        </div>
+    <div class="option-group">
+      <div class="option-label">督导后风险</div>
+      <div class="options">
+        <div class="opt-item active">全部</div>
+        <div class="opt-item">未评估</div>
+        <div class="opt-item">低风险</div>
+        <div class="opt-item">中风险</div>
+        <div class="opt-item">高风险</div>
       </div>
     </div>
   </div>
@@ -116,6 +124,7 @@
         this.classList.add('active');
       });
     });
+    
     function resetAll() {
       document.querySelectorAll('.option-group').forEach(function(group) {
         var items = group.querySelectorAll('.opt-item');
@@ -124,10 +133,12 @@
       });
       showToast('已重置所有条件');
     }
+    
     function confirmFilter() {
       showToast('筛选条件已应用');
       setTimeout(function() { location.href = 'problem-list.html'; }, 800);
     }
+    
     function showToast(msg) {
       var t = document.getElementById('toast');
       t.textContent = msg;

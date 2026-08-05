@@ -43,19 +43,56 @@
       <text x="180" y="260" text-anchor="middle" fill="#6b7280" font-size="14">重庆市</text>
     </svg>
 
-    <!-- 点位标记 -->
-    <div style="position:absolute;top:180px;left:140px;cursor:pointer;" onclick="location.href='map-detail.html'">
+    <!-- 督察问题点位 -->
+    <div class="map-marker" data-category="督察问题" style="position:absolute;top:180px;left:140px;cursor:pointer;" onclick="location.href='map-detail.html'">
       <div style="width:32px;height:32px;background:var(--primary);border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(26,92,255,0.3);">
         <i class="fas fa-exclamation" style="color:#fff;font-size:12px;transform:rotate(45deg);"></i>
       </div>
       <div style="font-size:10px;color:var(--text-secondary);text-align:center;margin-top:4px;white-space:nowrap;">L1QZTS1357</div>
     </div>
 
-    <div style="position:absolute;top:240px;left:220px;cursor:pointer;" onclick="location.href='map-detail.html'">
+    <div class="map-marker" data-category="督察问题" style="position:absolute;top:280px;left:190px;cursor:pointer;" onclick="location.href='map-detail.html'">
+      <div style="width:32px;height:32px;background:var(--primary);border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(26,92,255,0.3);">
+        <i class="fas fa-exclamation" style="color:#fff;font-size:12px;transform:rotate(45deg);"></i>
+      </div>
+      <div style="font-size:10px;color:var(--text-secondary);text-align:center;margin-top:4px;white-space:nowrap;">L2QZDC088</div>
+    </div>
+
+    <!-- 清单问题点位 -->
+    <div class="map-marker" data-category="清单问题" style="position:absolute;top:240px;left:220px;cursor:pointer;display:none;" onclick="location.href='map-detail.html'">
       <div style="width:32px;height:32px;background:var(--warning);border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(255,143,31,0.3);">
         <i class="fas fa-exclamation" style="color:#fff;font-size:12px;transform:rotate(45deg);"></i>
       </div>
       <div style="font-size:10px;color:var(--text-secondary);text-align:center;margin-top:4px;white-space:nowrap;">ST26042920094</div>
+    </div>
+
+    <div class="map-marker" data-category="清单问题" style="position:absolute;top:210px;left:160px;cursor:pointer;display:none;" onclick="location.href='map-detail.html'">
+      <div style="width:32px;height:32px;background:var(--warning);border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(255,143,31,0.3);">
+        <i class="fas fa-exclamation" style="color:#fff;font-size:12px;transform:rotate(45deg);"></i>
+      </div>
+      <div style="font-size:10px;color:var(--text-secondary);text-align:center;margin-top:4px;white-space:nowrap;">ST24123015610</div>
+    </div>
+
+    <div class="map-marker" data-category="清单问题" style="position:absolute;top:300px;left:240px;cursor:pointer;display:none;" onclick="location.href='map-detail.html'">
+      <div style="width:32px;height:32px;background:var(--warning);border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(255,143,31,0.3);">
+        <i class="fas fa-exclamation" style="color:#fff;font-size:12px;transform:rotate(45deg);"></i>
+      </div>
+      <div style="font-size:10px;color:var(--text-secondary);text-align:center;margin-top:4px;white-space:nowrap;">ST26051820055</div>
+    </div>
+
+    <!-- 线索问题点位 -->
+    <div class="map-marker" data-category="线索问题" style="position:absolute;top:250px;left:180px;cursor:pointer;display:none;" onclick="location.href='map-detail.html'">
+      <div style="width:32px;height:32px;background:var(--success);border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(103,194,58,0.3);">
+        <i class="fas fa-exclamation" style="color:#fff;font-size:12px;transform:rotate(45deg);"></i>
+      </div>
+      <div style="font-size:10px;color:var(--text-secondary);text-align:center;margin-top:4px;white-space:nowrap;">XS2026072101</div>
+    </div>
+
+    <div class="map-marker" data-category="线索问题" style="position:absolute;top:320px;left:210px;cursor:pointer;display:none;" onclick="location.href='map-detail.html'">
+      <div style="width:32px;height:32px;background:var(--success);border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(103,194,58,0.3);">
+        <i class="fas fa-exclamation" style="color:#fff;font-size:12px;transform:rotate(45deg);"></i>
+      </div>
+      <div style="font-size:10px;color:var(--text-secondary);text-align:center;margin-top:4px;white-space:nowrap;">XS2026071503</div>
     </div>
 
     <!-- 定位按钮 -->
@@ -87,12 +124,27 @@
   <div class="toast" id="toast"></div>
 
   <script>
-    document.querySelectorAll('.cat-item').forEach(item => {
+    document.querySelectorAll('.cat-item').forEach((item, index) => {
       item.addEventListener('click', function() {
         document.querySelectorAll('.cat-item').forEach(c => c.classList.remove('active'));
         this.classList.add('active');
+        
+        var categories = ['全部', '督察问题', '清单问题', '线索问题'];
+        var selectedCategory = categories[index];
+        
+        document.querySelectorAll('.map-marker').forEach(marker => {
+          var markerCategory = marker.getAttribute('data-category');
+          if (selectedCategory === '全部') {
+            marker.style.display = 'block';
+          } else if (markerCategory === selectedCategory) {
+            marker.style.display = 'block';
+          } else {
+            marker.style.display = 'none';
+          }
+        });
       });
     });
+    
     document.getElementById('searchInput').addEventListener('input', function() {
       if (!this.value) {
         const t = document.getElementById('toast');

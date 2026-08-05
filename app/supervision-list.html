@@ -65,8 +65,9 @@
     <div class="biz-tab">问责</div>
   </div>
 
-  <div class="page-content">
-    <div class="card">
+  <div class="page-content" id="contentArea">
+    <!-- 督导数据 -->
+    <div class="card" data-category="督导">
       <div class="card-title">
         <span class="tag tag-orange">待审核</span>
         <span style="flex:1;margin-left:6px;">L2ZYDC063</span>
@@ -87,7 +88,7 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-category="督导">
       <div class="card-title">
         <span class="tag tag-green">审核通过</span>
         <span style="flex:1;margin-left:6px;">L3ZYDC001</span>
@@ -105,7 +106,7 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-category="督导">
       <div class="card-title">
         <span class="tag tag-red">审核驳回</span>
         <span style="flex:1;margin-left:6px;">L1ZYDC101</span>
@@ -123,6 +124,142 @@
         <button class="btn btn-outline" onclick="viewDetail('edit')">编辑</button>
         <button class="btn btn-outline" onclick="submitAudit()">提交审核</button>
         <button class="btn btn-danger" onclick="showConfirm()">删除</button>
+      </div>
+    </div>
+
+    <!-- 交办数据 -->
+    <div class="card" data-category="交办" style="display:none;">
+      <div class="card-title">
+        <span class="tag tag-orange">待交办</span>
+        <span style="flex:1;margin-left:6px;">JB2026080201</span>
+      </div>
+      <div class="field-row"><span class="label">问题编号</span><span class="value">ST24123015610</span></div>
+      <div class="field-row"><span class="label">问题名称</span><span class="value">巫山县饮用水水源二级保护区临时货运码头尚未完成搬迁</span></div>
+      <div class="field-row"><span class="label">交办单位</span><span class="value">督察二处</span></div>
+      <div class="field-row"><span class="label">交办日期</span><span class="value">2026-08-02</span></div>
+      <div class="field-row"><span class="label">交办对象</span><span class="value">巫山县人民政府</span></div>
+      <div class="field-row"><span class="label">整改期限</span><span class="value">2025-03-31</span></div>
+      <div class="action-btns">
+        <button class="btn btn-primary">查看详情</button>
+        <button class="btn btn-outline">发送交办函</button>
+      </div>
+    </div>
+
+    <div class="card" data-category="交办" style="display:none;">
+      <div class="card-title">
+        <span class="tag tag-green">已交办</span>
+        <span style="flex:1;margin-left:6px;">JB2026072501</span>
+      </div>
+      <div class="field-row"><span class="label">问题编号</span><span class="value">ST26042920094</span></div>
+      <div class="field-row"><span class="label">问题名称</span><span class="value">綦江区矿井水整治效果需持续巩固</span></div>
+      <div class="field-row"><span class="label">交办单位</span><span class="value">督察一处</span></div>
+      <div class="field-row"><span class="label">交办日期</span><span class="value">2026-07-25</span></div>
+      <div class="field-row"><span class="label">交办对象</span><span class="value">綦江区人民政府</span></div>
+      <div class="field-row"><span class="label">整改期限</span><span class="value">2026-12-31</span></div>
+      <div class="action-btns">
+        <button class="btn btn-primary">查看详情</button>
+      </div>
+    </div>
+
+    <!-- 督办数据 -->
+    <div class="card" data-category="督办" style="display:none;">
+      <div class="card-title">
+        <span class="tag tag-red">临期预警</span>
+        <span style="flex:1;margin-left:6px;">DB2026073101</span>
+      </div>
+      <div class="field-row"><span class="label">问题编号</span><span class="value">ST24123015610</span></div>
+      <div class="field-row"><span class="label">问题名称</span><span class="value">巫山县饮用水水源保护区码头搬迁</span></div>
+      <div class="field-row"><span class="label">督办单位</span><span class="value">督察二处</span></div>
+      <div class="field-row"><span class="label">督办日期</span><span class="value">2026-07-31</span></div>
+      <div class="field-row"><span class="label">整改期限</span><span class="value">2025-03-31</span></div>
+      <div class="field-row"><span class="label">剩余天数</span><span class="value"><span class="tag tag-orange">15天</span></span></div>
+      <div class="action-btns">
+        <button class="btn btn-primary">查看详情</button>
+        <button class="btn btn-outline">发督办函</button>
+      </div>
+    </div>
+
+    <div class="card" data-category="督办" style="display:none;">
+      <div class="card-title">
+        <span class="tag tag-blue">督办中</span>
+        <span style="flex:1;margin-left:6px;">DB2026072201</span>
+      </div>
+      <div class="field-row"><span class="label">问题编号</span><span class="value">ST26051820055</span></div>
+      <div class="field-row"><span class="label">问题名称</span><span class="value">合川区春节燃放烟花爆竹管控不力</span></div>
+      <div class="field-row"><span class="label">督办单位</span><span class="value">督察三处</span></div>
+      <div class="field-row"><span class="label">督办日期</span><span class="value">2026-07-22</span></div>
+      <div class="field-row"><span class="label">整改期限</span><span class="value">2026-09-30</span></div>
+      <div class="field-row"><span class="label">剩余天数</span><span class="value"><span class="tag tag-green">60天</span></span></div>
+      <div class="action-btns">
+        <button class="btn btn-primary">查看详情</button>
+      </div>
+    </div>
+
+    <!-- 资料调阅数据 -->
+    <div class="card" data-category="资料调阅" style="display:none;">
+      <div class="card-title">
+        <span class="tag tag-orange">待提交</span>
+        <span style="flex:1;margin-left:6px;">ZL2026080301</span>
+      </div>
+      <div class="field-row"><span class="label">问题编号</span><span class="value">ST26042920094</span></div>
+      <div class="field-row"><span class="label">调阅单位</span><span class="value">督察一处</span></div>
+      <div class="field-row"><span class="label">调阅人</span><span class="value">秦莉华</span></div>
+      <div class="field-row"><span class="label">发起时间</span><span class="value">2026-08-03</span></div>
+      <div class="field-row"><span class="label">要求提交时间</span><span class="value">2026-08-10</span></div>
+      <div class="field-row"><span class="label">调阅内容</span><span class="value">綦江区矿井水整治工程验收报告、水质检测数据</span></div>
+      <div class="action-btns">
+        <button class="btn btn-primary">查看详情</button>
+        <button class="btn btn-outline">上传资料</button>
+      </div>
+    </div>
+
+    <div class="card" data-category="资料调阅" style="display:none;">
+      <div class="card-title">
+        <span class="tag tag-green">已完成</span>
+        <span style="flex:1;margin-left:6px;">ZL2026072801</span>
+      </div>
+      <div class="field-row"><span class="label">问题编号</span><span class="value">ST24123015610</span></div>
+      <div class="field-row"><span class="label">调阅单位</span><span class="value">督察二处</span></div>
+      <div class="field-row"><span class="label">调阅人</span><span class="value">张涵</span></div>
+      <div class="field-row"><span class="label">发起时间</span><span class="value">2026-07-28</span></div>
+      <div class="field-row"><span class="label">完成时间</span><span class="value">2026-08-01</span></div>
+      <div class="field-row"><span class="label">调阅内容</span><span class="value">码头搬迁方案、现场照片、进度说明</span></div>
+      <div class="action-btns">
+        <button class="btn btn-primary">查看详情</button>
+      </div>
+    </div>
+
+    <!-- 问责数据 -->
+    <div class="card" data-category="问责" style="display:none;">
+      <div class="card-title">
+        <span class="tag tag-red">问责启动</span>
+        <span style="flex:1;margin-left:6px;">WZ2026080101</span>
+      </div>
+      <div class="field-row"><span class="label">问题编号</span><span class="value">ST26051820055</span></div>
+      <div class="field-row"><span class="label">问题名称</span><span class="value">合川区春节燃放烟花爆竹管控不力</span></div>
+      <div class="field-row"><span class="label">问责单位</span><span class="value">督察三处</span></div>
+      <div class="field-row"><span class="label">问责对象</span><span class="value">合川区生态环境局</span></div>
+      <div class="field-row"><span class="label">启动时间</span><span class="value">2026-08-01</span></div>
+      <div class="field-row"><span class="label">问责原因</span><span class="value">整改不力、屡次督办仍未整改到位</span></div>
+      <div class="action-btns">
+        <button class="btn btn-primary">查看详情</button>
+        <button class="btn btn-outline">约谈记录</button>
+      </div>
+    </div>
+
+    <div class="card" data-category="问责" style="display:none;">
+      <div class="card-title">
+        <span class="tag tag-gray">问责调查中</span>
+        <span style="flex:1;margin-left:6px;">WZ2026072501</span>
+      </div>
+      <div class="field-row"><span class="label">问题编号</span><span class="value">ST25092013248</span></div>
+      <div class="field-row"><span class="label">问题名称</span><span class="value">渝北区工业园区噪声污染超标</span></div>
+      <div class="field-row"><span class="label">问责单位</span><span class="value">督察一处</span></div>
+      <div class="field-row"><span class="label">问责对象</span><span class="value">渝北区工业园区管委会</span></div>
+      <div class="field-row"><span class="label">启动时间</span><span class="value">2026-07-25</span></div>
+      <div class="field-row"><span class="label">问责原因</span><span class="value">整改敷衍、未落实整改措施</span></div>
+      <div class="action-btns">
+        <button class="btn btn-primary">查看详情</button>
       </div>
     </div>
   </div>
@@ -160,12 +297,26 @@
       t.textContent = msg; t.classList.add('show');
       setTimeout(function() { t.classList.remove('show'); }, 1500);
     }
-    document.querySelectorAll('#bizTabs .biz-tab').forEach(function(item) {
+    
+    document.querySelectorAll('#bizTabs .biz-tab').forEach(function(item, index) {
       item.addEventListener('click', function() {
         document.querySelectorAll('#bizTabs .biz-tab').forEach(function(s) { s.classList.remove('active'); });
         this.classList.add('active');
+        
+        var categories = ['督导', '交办', '督办', '资料调阅', '问责'];
+        var selectedCategory = categories[index];
+        
+        document.querySelectorAll('#contentArea .card').forEach(function(card) {
+          var cardCategory = card.getAttribute('data-category');
+          if (cardCategory === selectedCategory) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
       });
     });
+    
     document.getElementById('searchInput').addEventListener('input', function() {
       if (!this.value) showToast('已清空搜索');
     });

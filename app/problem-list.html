@@ -81,8 +81,8 @@
     <div class="tab-item" onclick="location.href='support.html'"><i class="fas fa-hands-helping"></i><span>支持</span></div>
   </div>
 
-  <div class="filter-panel" id="filterPanel">
-    <div class="panel-body">
+  <div class="filter-panel" id="filterPanel" onclick="hideFilter()">
+    <div class="panel-body" onclick="event.stopPropagation()">
       <div class="panel-title">更多查询条件</div>
       <div class="option-group"><div class="option-label">督导单位</div><div class="options"><div class="opt-item">全部</div><div class="opt-item">督察一处</div><div class="opt-item">督察二处</div><div class="opt-item">督察三处</div></div></div>
       <div class="option-group"><div class="option-label">问题来源</div><div class="options"><div class="opt-item">全部</div><div class="opt-item">第三轮中央督察</div><div class="opt-item">第二轮中央督察</div><div class="opt-item">长江警示片</div></div></div>
